@@ -11,12 +11,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.devlogger</groupId>
-	<artifactId>auth-service</artifactId>
+	<artifactId>config</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>DL Auth service</name>
-	<description>API provide authentication/authorization mechanism</description>
+	<name>DL Config</name>
+	<description>Module store config for the services</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -26,21 +26,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -48,7 +35,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-parent</artifactId>
+				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>Camden.SR7</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -62,7 +49,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>auth-service</finalName>
+					<finalName>config</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

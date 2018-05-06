@@ -1,0 +1,28 @@
+server:
+  port: 4000
+zuul:
+  routes:
+    auth-service:
+      path: /auth/**
+      serviceId: auth-service
+      stripPrefix: false
+
+    notification-service:
+      path: /notifications/**
+      serviceId: notification-service
+      stripPrefix: false
+
+    account-service:
+      path: /accounts/**
+      serviceId: account-service
+      stripPrefix: false
+
+    post-service:
+      path: /posts/**
+      serviceId: post-service
+      stripPrefix: false
+
+    search-service:
+      path: /search/**
+      serviceId: search-service
+      stripPrefix: false
