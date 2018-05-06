@@ -11,12 +11,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.devlogger</groupId>
-	<artifactId>auth-service</artifactId>
+	<artifactId>gateway</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>DL Auth service</name>
-	<description>API provide authentication/authorization mechanism</description>
+	<name>DL Gateway</name>
+	<description>Module provide single point for entrance</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -24,31 +24,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-parent</artifactId>
+				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>Camden.SR7</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -56,13 +36,28 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zuul</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>auth-service</finalName>
+					<finalName>gateway</finalName>
 				</configuration>
 			</plugin>
 		</plugins>
