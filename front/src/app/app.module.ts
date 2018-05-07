@@ -6,14 +6,22 @@ import { QuillModule } from 'ngx-quill';
 
 import { AppComponent } from './app.component';
 
+import Quill from 'quill';
+
+window.Quill = Quill;
+
+const ImageResize = require('quill-image-resize-module').default;
+
+window.Quill.register('module/imageResize', ImageResize);
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    QuillModule,
-    AppRoutingModule
+    AppRoutingModule,
+    QuillModule
   ],
   providers: [],
   bootstrap: [AppComponent]
