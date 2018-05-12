@@ -19,4 +19,5 @@ after_success:
 
   - docker build -t config:$COMMIT ./config
   - docker tag config:$COMMIT $DOCKER_USER/$REPOSITORY
+  - docker images
   - docker push $DOCKER_USER/$REPOSITORY
