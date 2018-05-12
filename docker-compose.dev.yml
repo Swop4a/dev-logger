@@ -7,3 +7,21 @@ services:
 
   registry:
     build: registry
+
+  gateway:
+    build: gateway
+
+  auth-service:
+    build: auth-service
+    ports:
+      - 8082:8082
+
+  post-service:
+    build: post-service
+    ports:
+      - 8085:8085
+
+  notification-service:
+    build: notification-service
+    ports:
+      - 8084:8084
