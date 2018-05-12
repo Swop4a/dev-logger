@@ -3,5 +3,5 @@ spring:
     name: export-service
   cloud:
     config:
-      uri: http://localhost:8888
-      fail-fast: false
+      uri: http://config:8888
+      fail-fast: true

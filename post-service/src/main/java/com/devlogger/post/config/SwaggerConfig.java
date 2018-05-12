@@ -19,8 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-	@Value("${app.version}")
-	private String version;
+	private static final String VERSION = "0.0.1";
 
 	@Bean
 	public Docket productApi() {
@@ -34,7 +33,7 @@ public class SwaggerConfig {
 	public ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 			.title("API provide operations for posts manipulation")
-			.version(version)
+			.version(VERSION)
 			.contact(
 				new Contact("Alexandr Pavkin",
 					"https://github.com/Swop4a",

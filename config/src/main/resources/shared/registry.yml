@@ -1,11 +1,2 @@
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    server:
-      waitTimeInMsWhenSyncEmpty: 0
-
 server:
-  port: 8765
+  port: 8761
