@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-	@Value("${app.version}")
+//	@Value("${app.version}")
 	private String version;
 
 	@Bean

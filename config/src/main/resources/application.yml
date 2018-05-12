@@ -4,6 +4,8 @@ server:
 spring:
   cloud:
     config:
+      discovery:
+        enabled: true
       server:
         native:
           search-locations: classpath:/shared
