@@ -19,4 +19,4 @@ after_success:
   - export CONFIG=config
   - docker build -t $CONFIG:$COMMIT ./config
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
-  - docker push $DOCKER_USER/$CONFIG
+  - docker push $DOCKER_USER/repo:$CONFIG
