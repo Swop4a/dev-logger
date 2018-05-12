@@ -18,6 +18,6 @@ after_success:
   - export REPOSITORY=repo
 
   - docker build -t config:$COMMIT ./config
-  - docker tag config:$COMMIT $DOCKER_USER/$REPOSITORY:config
+  - docker tag config:$COMMIT $DOCKER_USER/$REPOSITORY:config/$TAG
   - docker images
   - docker push $DOCKER_USER/$REPOSITORY
