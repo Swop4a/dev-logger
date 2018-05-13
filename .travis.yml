@@ -22,7 +22,7 @@ after_success:
   - docker images
   - docker push $DOCKER_USER/$REPOSITORY
 
-  - docker build -t registry:$COMMIT ./config
-  - docker tag registry:$COMMIT $DOCKER_USER/registry:$TAG
+  - echo $TAG
+  - docker build -t $DOCKER_USER/registry:$TAG ./config
   - docker images
   - docker push $DOCKER_USER/registry
