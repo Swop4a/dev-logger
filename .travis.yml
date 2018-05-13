@@ -14,7 +14,7 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
 
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH | cut -d "/" -f4 ; fi`
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH | cut -d "/" -f3 ; fi`
   - export REPOSITORY=repo
 
   - docker build -t config:$COMMIT ./config
