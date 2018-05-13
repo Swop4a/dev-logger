@@ -1,0 +1,17 @@
+.logo {
+  height: 30px;
+  width: 136px;
+}
+
+.profile {
+  height: 45px;
+  width: 45px;
+
+  & > img {
+    width: 100%;
+  }
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}

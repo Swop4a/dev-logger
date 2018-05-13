@@ -2,14 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material';
+
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { QuillModule } from 'ngx-quill';
+import Quill from 'quill';
 
 import { AppRoutingModule } from './app-routing.module';
-import { QuillModule } from 'ngx-quill';
 
 import { AppComponent } from './app.component';
-
-import Quill from 'quill';
 import { HeaderComponent } from './header/header.component';
 import { EditorComponent } from './editor/editor.component';
 import { CreatePostComponent } from './create-post/create-post.component';
@@ -38,6 +40,8 @@ window.Quill.register('module/imageResize', ImageResize);
     FormsModule,
     HttpClientModule,
     AngularSvgIconModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

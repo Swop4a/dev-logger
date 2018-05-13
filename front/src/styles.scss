@@ -1,11 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'quill/dist/quill.bubble.css';
 @import 'quill/dist/quill.snow.css';
+// @import "@angular/material/prebuilt-themes/purple-green.css";
 @import 'highlightjs/styles/solarized_dark.css';
 @import 'normalize.css/normalize.css';
 
+// TODO: выпилить этот шрифт, используется только в лого
 @font-face {
   font-family: "Comfortaa";
   font-weight: bold;
   src: url("./assets/Comfortaa-Bold.ttf") format("truetype");
+}
+
+:root {
+  --black: #212121;
+  --white: #FFFFFF;
+  --teal: #009688;
 }
