@@ -15,14 +15,21 @@ after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
 
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH | cut -d "/" -f3 ; fi`
-  - export REPOSITORY=repo
 
-  - docker build -t config:$COMMIT ./config
-  - docker tag config:$COMMIT $DOCKER_USER/$REPOSITORY:config
-  - docker images
-  - docker push $DOCKER_USER/$REPOSITORY
-
-  - echo $TAG
-  - docker build -t $DOCKER_USER/registry:$TAG ./config
-  - docker images
+  - docker build -t $DOCKER_USER/registry:$TAG ./registry
   - docker push $DOCKER_USER/registry
+
+  - docker build -t $DOCKER_USER/config:$TAG ./config
+  - docker push $DOCKER_USER/config
+
+  - docker build -t $DOCKER_USER/gateway:$TAG ./gateway
+  - docker push $DOCKER_USER/gateway
+
+  - docker build -t $DOCKER_USER/account-service:$TAG ./account-service
+  - docker push $DOCKER_USER/account-service
+
+  - docker build -t $DOCKER_USER/auth-service:$TAG ./auth-service
+  - docker push $DOCKER_USER/auth-service
+
+  - docker build -t $DOCKER_USER/post-service:$TAG ./post-service
+  - docker push $DOCKER_USER/post-service
