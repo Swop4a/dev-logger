@@ -1,6 +1,10 @@
 .logo {
   height: 30px;
   width: 136px;
+
+  & > img {
+    width: 100%;
+  }
 }
 
 .profile {

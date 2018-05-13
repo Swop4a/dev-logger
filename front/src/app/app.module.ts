@@ -1,9 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MatButtonModule,
+  MatAutocompleteModule,
+} from '@angular/material';
+import 'hammerjs';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { QuillModule } from 'ngx-quill';
@@ -11,12 +19,16 @@ import Quill from 'quill';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { SearchService } from './search.service';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { EditorComponent } from './editor/editor.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { MainComponent } from './main/main.component';
 import { PostPageComponent } from './post-page/post-page.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 window.Quill = Quill;
 
@@ -31,7 +43,9 @@ window.Quill.register('module/imageResize', ImageResize);
     EditorComponent,
     CreatePostComponent,
     MainComponent,
-    PostPageComponent
+    PostPageComponent,
+    SearchbarComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +55,17 @@ window.Quill.register('module/imageResize', ImageResize);
     HttpClientModule,
     AngularSvgIconModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatAutocompleteModule,
   ],
-  providers: [],
+  providers: [
+    SearchService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

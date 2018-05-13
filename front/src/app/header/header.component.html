@@ -1,10 +1,17 @@
-<mat-toolbar color="primary" class="mat-typography" role="header">
-  <img class="logo" srcset="assets/full-logo.png 320w,
-             assets/full-logo@2x.png 480w,
-             assets/full-logo@3x.png 800w"
-        alt="dev-logger"
-  >
+<mat-toolbar  class="mat-typography" role="header">
+  <a class="logo" routerLink="">
+    <img
+      srcset="assets/full-logo.png 320w,
+              assets/full-logo@2x.png 480w,
+              assets/full-logo@3x.png 800w"
+      alt="dev-logger"
+    >
+  </a>
+
   <span class="fill-remaining-space"></span>
+
+  <app-searchbar></app-searchbar>
+
   <a class="profile" routerLink="/profile">
     <img src="assets/profile-photo@2x.webp" alt="profile"/>
   </a>

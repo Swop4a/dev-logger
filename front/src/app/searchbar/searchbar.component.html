@@ -1,0 +1,18 @@
+<mat-form-field floatLabel="never">
+  <input
+    [formControl]="search"
+    matInput
+    placeholder="Search"
+    [matAutocomplete]="auto"
+  >
+  <mat-icon matPrefix class="search-icon">search</mat-icon>
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" (optionSelected)="getPost($event.option.value)">
+  <mat-option
+    *ngFor="let option of $filteredOptions | async"
+    [value]="option.title"
+  >
+    {{ option.title }}
+  </mat-option>
+</mat-autocomplete>
