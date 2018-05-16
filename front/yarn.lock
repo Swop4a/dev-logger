@@ -356,6 +356,10 @@ amqplib@^0.5.2:
     readable-stream "1.x >=1.1.9"
     safe-buffer "^5.0.1"
 
+angular-in-memory-web-api@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/angular-in-memory-web-api/-/angular-in-memory-web-api-0.6.0.tgz#28262d6f7cdf1415c1d540c1a5cb838d58cb602a"
+
 angular-svg-icon@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/angular-svg-icon/-/angular-svg-icon-6.0.0.tgz#99d8d48c9d7df8edbb8cb8f038062a515a007929"

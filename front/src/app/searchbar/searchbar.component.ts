@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { map, startWith, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-import { SearchService } from '../search.service';
+import { PostsService } from '../posts.service';
 import { SearchPost } from '../search-post';
 
 @Component({
@@ -15,25 +15,30 @@ import { SearchPost } from '../search-post';
 export class SearchbarComponent implements OnInit {
   search: FormControl = new FormControl();
 
-  $filteredOptions: Observable<SearchPost[]>;
+  posts$: Observable<SearchPost[]>;
 
   constructor(
     private router: Router,
-    private searchService: SearchService,
+    private searchService: PostsService,
   ) { }
 
   ngOnInit() {
-    this.$filteredOptions = this.search.valueChanges.pipe(
-      startWith(''),
-      map(val => this.searchService.searchPosts(val)),
+    this.posts$ = this.search.valueChanges.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.searchService.searchPosts(term)),
     );
   }
 
 
-  getPost(title: SearchPost['title']) {
-    // NOTE: запрос поста должен просиходить на маунте страницы поста
-    // this.router.navigate(['posts', this.searchService. options.find(option => option.title === title).id]);
-    // this.search.reset('');
+  getPost(id: SearchPost['id']) {
+    this.search.reset('');
+    this.router.navigate(['posts', id]);
   }
 
 }

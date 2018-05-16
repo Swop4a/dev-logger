@@ -10,9 +10,9 @@
 
 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="getPost($event.option.value)">
   <mat-option
-    *ngFor="let option of $filteredOptions | async"
-    [value]="option.title"
+    *ngFor="let post of posts$ | async"
+    [value]="post.id"
   >
-    {{ option.title }}
+    {{ post.title }}
   </mat-option>
 </mat-autocomplete>
