@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SearchPost } from '../search-post';
 
@@ -10,9 +11,13 @@ import { SearchPost } from '../search-post';
 export class PostPreviewComponent implements OnInit {
   @Input() post: SearchPost;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  seeMore() {
+    this.router.navigate(['posts', this.post.id]);
   }
 
 }
