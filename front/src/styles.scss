@@ -9,7 +9,7 @@
 
 @import 'dark-theme.scss';
 
-body {
+html {
   @include angular-material-theme($anms-black-theme);
 }
 

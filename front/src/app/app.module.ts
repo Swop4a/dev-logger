@@ -13,6 +13,7 @@ import {
   MatAutocompleteModule,
   MatSlideToggleModule,
   MatDividerModule,
+  MatTabsModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -71,6 +72,7 @@ window.Quill.register('module/imageResize', ImageResize);
     MatAutocompleteModule,
     MatSlideToggleModule,
     MatDividerModule,
+    MatTabsModule,
     FlexLayoutModule,
 
     HttpClientInMemoryWebApiModule.forRoot(

@@ -38,12 +38,14 @@
   }
 
   .posts__interesting-toggler .mat-slide-toggle-bar {
-    background-color: var(--grey);
+    // background-color: var(--grey);
   }
 
   .divider {
     max-width: 1020px;
-    margin: 9px 24px 0;
+    position: relative;
+    top: -1px;
+    margin: 0 24px;
     border-top-color: var(--grey);
   }
 }

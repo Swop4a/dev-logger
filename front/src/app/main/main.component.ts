@@ -12,7 +12,6 @@ import { SearchPost } from '../search-post';
 export class MainComponent implements OnInit {
   posts: SearchPost[];
   smartLenta = true;
-  postsType = 0;
 
   constructor(
     public postsService: PostsService,
@@ -20,6 +19,11 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.postsService.getPosts().subscribe(posts => this.posts = posts);
+  }
+
+  changePostsType(postsType: number) {
+    console.log(`Posts type changed to ${postsType}`);
+    // TODO: here we should perform request to another kind of posts
   }
 
 }

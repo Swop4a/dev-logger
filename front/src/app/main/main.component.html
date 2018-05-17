@@ -1,19 +1,11 @@
 <main class="mat-typography main-page">
   <!-- <svg-icon src="assets/logo.svg" [svgStyle]="{ 'width.px':90, 'height.px':90 }"></svg-icon> -->
-  <div fxLayout="row" fxLayoutGap="15px" class="posts__header">
-    <!-- TODO: make it accecible -->
-    <span
-      fxFlex="66px"
-      [class.posts__type_active]="postsType === 0"
-      (click)="postsType = 0"
-      class="posts__type"
-    >Feed</span>
-    <span
-      fxFlex="66px"
-      [class.posts__type_active]="postsType === 1"
-      class="posts__type"
-      (click)="postsType = 1"
-    >My posts</span>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px" class="posts__header">
+    <mat-tab-group (selectedIndexChange)="changePostsType($event)">
+      <mat-tab label="One"></mat-tab>
+      <mat-tab label="Two"></mat-tab>
+    </mat-tab-group>
+
     <span fxFlex class="posts__type"></span>
 
     <mat-slide-toggle
@@ -27,9 +19,5 @@
 
   <div class="posts__body">
     <app-post-preview *ngFor="let post of posts" [post]="post"></app-post-preview>
-    <!-- <div fxLayout="row" fxLayoutGap="15px" >
-      {{post | json}}
-      <img src="{{post.image}}" alt="{{post.title}}">
-    </div> -->
   </div>
 </main>
