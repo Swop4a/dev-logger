@@ -1,0 +1,51 @@
+.main-page {
+  margin-top: 90px;
+
+  .posts__body, .posts__header {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .posts__body {
+    margin-top: 77px;
+  }
+
+  .posts__type {
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      color: lighten(#212121, 20%);
+    }
+
+    &:first-child {
+      border-right: 1px solid var(--grey);
+    }
+
+    &_active {
+      position: relative;
+
+      &:after {
+      content: '';
+      position: absolute;
+      bottom: -9px;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      background: var(--black);
+      }
+    }
+  }
+
+  .posts__interesting-toggler .mat-slide-toggle-bar {
+    // background-color: var(--grey);
+  }
+
+  .divider {
+    max-width: 1020px;
+    position: relative;
+    top: -1px;
+    margin: 0 24px;
+    border-top-color: var(--grey);
+  }
+}
