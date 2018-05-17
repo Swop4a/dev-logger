@@ -14,13 +14,13 @@ export class PostsService {
 
   constructor(private http: HttpClient) { }
 
-  // getPosts(): Observable<SearchPost[]> {
-  //   return this.http.get<SearchPost[]>(this.searchPostsURL)
-  //     .pipe(
-  //       tap(heroes => this.log('heroes fetched')),
-  //       catchError(this.handleError('getSearchPosts', [])),
-  //     );
-  // }
+  getPosts(): Observable<SearchPost[]> {
+    return this.http.get<SearchPost[]>(this.searchPostsURL)
+      .pipe(
+        tap(heroes => this.log('posts fetched')),
+        catchError(this.handleError('getPosts', [])),
+      );
+  }
 
   getPost(id: number): Observable<SearchPost> {
     return this.http.get<SearchPost>(`${this.searchPostsURL}/${id}`)

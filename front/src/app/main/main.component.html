@@ -1,4 +1,35 @@
-<main class="mat-typography">
-  <h2>Welcome to the Dev-logger!</h2>
-  <svg-icon src="assets/logo.svg" [svgStyle]="{ 'width.px':90, 'height.px':90 }"></svg-icon>
+<main class="mat-typography main-page">
+  <!-- <svg-icon src="assets/logo.svg" [svgStyle]="{ 'width.px':90, 'height.px':90 }"></svg-icon> -->
+  <div fxLayout="row" fxLayoutGap="15px" class="posts__header">
+    <!-- TODO: make it accecible -->
+    <span
+      fxFlex="66px"
+      [class.posts__type_active]="postsType === 0"
+      (click)="postsType = 0"
+      class="posts__type"
+    >Feed</span>
+    <span
+      fxFlex="66px"
+      [class.posts__type_active]="postsType === 1"
+      class="posts__type"
+      (click)="postsType = 1"
+    >My posts</span>
+    <span fxFlex class="posts__type"></span>
+
+    <mat-slide-toggle
+      [(ngModel)]="smartLenta"
+      class="posts__interesting-toggler"
+      color="accent"
+    >Interesting at the top</mat-slide-toggle>
+  </div>
+
+  <mat-divider class="divider"></mat-divider>
+
+  <div class="posts__body">
+    <app-post-preview *ngFor="let post of posts" [post]="post"></app-post-preview>
+    <!-- <div fxLayout="row" fxLayoutGap="15px" >
+      {{post | json}}
+      <img src="{{post.image}}" alt="{{post.title}}">
+    </div> -->
+  </div>
 </main>

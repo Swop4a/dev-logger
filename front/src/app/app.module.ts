@@ -11,7 +11,10 @@ import {
   MatIconModule,
   MatButtonModule,
   MatAutocompleteModule,
+  MatSlideToggleModule,
+  MatDividerModule,
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -31,6 +34,7 @@ import { MainComponent } from './main/main.component';
 import { PostPageComponent } from './post-page/post-page.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { PostPreviewComponent } from './post-preview/post-preview.component';
 
 window.Quill = Quill;
 
@@ -48,6 +52,7 @@ window.Quill.register('module/imageResize', ImageResize);
     PostPageComponent,
     SearchbarComponent,
     ProfilePageComponent,
+    PostPreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +69,9 @@ window.Quill.register('module/imageResize', ImageResize);
     MatIconModule,
     MatButtonModule,
     MatAutocompleteModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    FlexLayoutModule,
 
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
