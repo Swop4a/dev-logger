@@ -1,8 +1,31 @@
 .post-preview {
   max-width: 796px;
   margin: 0 auto;
+  margin-bottom: 65px;
 }
 
 .post-preview__image {
   float: right;
+  width: 241px;
+  height: 136px;
+  object-fit: contain;
+  margin: 0 0 24px 24px;
+}
+
+.post__title {
+  margin-bottom: 0;
+}
+
+.post__tags {
+  color: var(--darkerGrey);
+}
+
+.meta {
+  max-width: 260px;
+  border-radius: 8px;
+  padding: 8px 20px;
+}
+
+.mat-body-1 {
+  margin-bottom: 24px;
 }

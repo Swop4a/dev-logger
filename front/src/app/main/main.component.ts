@@ -12,6 +12,7 @@ import { SearchPost } from '../search-post';
 export class MainComponent implements OnInit {
   posts: SearchPost[];
   smartLenta = true;
+  selectedPostsType = 0;
 
   constructor(
     public postsService: PostsService,

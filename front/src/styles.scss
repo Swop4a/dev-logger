@@ -9,8 +9,14 @@
 
 @import 'dark-theme.scss';
 
+@import 'app/shared/post-preview.component.scss-theme';
+
 html {
   @include angular-material-theme($anms-black-theme);
+}
+
+.post-preview {
+  @include post-preview-component-theme($anms-black-theme);
 }
 
 // TODO: выпилить этот шрифт, используется только в лого
@@ -25,4 +31,5 @@ html {
   --white: #FFFFFF;
   --teal: #009688;
   --grey: #dddddd;
+  --darkerGrey: rgba(0, 0, 0, 0.54);
 }
