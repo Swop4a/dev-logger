@@ -44,8 +44,12 @@
   .divider {
     max-width: 1020px;
     position: relative;
+    margin: 0 auto;
     top: -1px;
-    margin: 0 24px;
     border-top-color: var(--grey);
+
+    @media screen and (max-width: 1044px) {
+      margin: 0 24px;
+    }
   }
 }
