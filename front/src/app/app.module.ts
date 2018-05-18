@@ -36,6 +36,8 @@ import { PostPageComponent } from './post-page/post-page.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
+import { FooterComponent } from './footer/footer.component';
+import { DividerComponent } from './divider/divider.component';
 
 window.Quill = Quill;
 
@@ -54,6 +56,8 @@ window.Quill.register('module/imageResize', ImageResize);
     SearchbarComponent,
     ProfilePageComponent,
     PostPreviewComponent,
+    FooterComponent,
+    DividerComponent,
   ],
   imports: [
     BrowserModule,

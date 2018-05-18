@@ -40,16 +40,4 @@
   .posts__interesting-toggler .mat-slide-toggle-bar {
     // background-color: var(--grey);
   }
-
-  .divider {
-    max-width: 1020px;
-    position: relative;
-    margin: 0 auto;
-    top: -1px;
-    border-top-color: var(--grey);
-
-    @media screen and (max-width: 1044px) {
-      margin: 0 24px;
-    }
-  }
 }
