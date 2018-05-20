@@ -56,6 +56,18 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  post-mongodb:
+    environment:
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+      INIT_DUMP: init-posts.js
+    image: post-mongodb
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+
   post-service:
     image: post-service
     restart: always

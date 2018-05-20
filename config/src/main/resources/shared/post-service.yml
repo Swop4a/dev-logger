@@ -1,2 +1,13 @@
+spring:
+  jackson:
+    mapper:
+      default-view-inclusion: true
+  data:
+    mongodb:
+      host: account-mongodb
+      port: 27017
+      username: user
+      password: ${MONGODB_PASSWORD}
+      database: dlogger
 server:
   port: 8085
