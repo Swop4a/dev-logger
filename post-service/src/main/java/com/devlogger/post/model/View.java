@@ -6,15 +6,11 @@ package com.devlogger.post.model;
  */
 public interface View {
 
-	class Basic {
+	class Full {
 
 	}
 
-	class Full extends Basic {
-
-	}
-
-	class Preview extends Basic {
+	class Preview {
 
 	}
 }

@@ -1,9 +1,14 @@
 package com.devlogger.post.services.impl;
 
+import static com.devlogger.post.model.Tab.FEED;
+import static com.devlogger.post.model.Tab.MY_POSTS;
+
 import com.devlogger.post.model.Post;
+import com.devlogger.post.model.Tab;
 import com.devlogger.post.repository.PostRepository;
 import com.devlogger.post.services.PostService;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostServiceImpl implements PostService {
 
+	private static final String MOCKED_NAME = "Alexandr Pavkin";
+	private static final Integer LIMIT = 1500;
+	private static final String NEW_PARAGRAPH = "\n\n";
+	private static final char DOT = '.';
+
 	private final PostRepository repository;
 
 	@Autowired
@@ -24,10 +34,28 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> findAllInPreviewMode() {
-		//TODO: investigate rules, cut posts by this rules
-		log.info("FIND ALL POSTS");
-		return repository.findAll();
+	public List<Post> findAllInPreviewMode(Tab tab, Boolean smart) {
+		log.info("REQUEST FOR TAB {} AND SMART MODE IS {}", tab, smart);
+
+		if (MY_POSTS.equals(tab) && smart) {
+			//TODO: it means that "show ONLY FOLLOWING'S posts with smart=true, delegate to other service"
+			return repository.findAll();
+		} else if (MY_POSTS.equals(tab)) {
+			//TODO: it means that "show ONLY FOLLOWING'S posts with smart=false, do it myself"
+			return repository.findAllByPublisherNameAndOrderByPublicationDateDesc(MOCKED_NAME).stream()
+				.peek(post -> {
+					String content = post.getContent();
+					String previewContent = getPreviewContent(content);
+					post.setContent(previewContent);
+				})
+				.collect(Collectors.toList());
+		} else if (FEED.equals(tab)) {
+			//TODO: it means that "show ALL INTERESTING posts with smart=true, delegate to other service"
+			return repository.findAll();
+		}
+
+		log.error("UNSUPPORTED TAB {} AND SMART MODE IS {}", tab, smart);
+		throw new UnsupportedOperationException("UNSUPPORTED OPERATION " + tab);
 	}
 
 	@Override
@@ -37,6 +65,7 @@ public class PostServiceImpl implements PostService {
 		Post post = repository.findOne(postId);
 		if (post == null) {
 			log.warn("POST WITH ID {} NOT FOUND!", postId);
+			return null;
 		}
 
 		log.info("POST {} RETRIEVED SUCCESSFULLY", post);
@@ -54,5 +83,36 @@ public class PostServiceImpl implements PostService {
 	public Post updatePost(Post post) {
 		log.info("UPDATE POST {}", post);
 		return repository.save(post);
+	}
+
+	@Override
+	public void deletePost(String postId) {
+		log.info("DELETE POST {}", postId);
+		repository.delete(postId);
+	}
+
+	private String getPreviewContent(String content) {
+		content = removeImagesFromContent(content);
+		content = normalizeContent(content);
+		content = content.substring(0, Math.min(content.length(), LIMIT));
+
+		int indexOfNewParagraph = content.indexOf(NEW_PARAGRAPH);
+		int indexOfLastDot = content.lastIndexOf(DOT);
+
+		if (indexOfNewParagraph > indexOfLastDot) {
+			return content.substring(0, Math.max(0, indexOfNewParagraph));
+		} else {
+			return content.substring(0, Math.max(0, indexOfLastDot));
+		}
+	}
+
+	private String normalizeContent(String content) {
+		//TODO remove all <h1>, <p> etc...
+		return content;
+	}
+
+	private String removeImagesFromContent(String content) {
+		//TODO remove all images by regexp
+		return content;
 	}
 }

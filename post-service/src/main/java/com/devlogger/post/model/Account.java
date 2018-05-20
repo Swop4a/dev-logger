@@ -1,5 +1,7 @@
 package com.devlogger.post.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +17,7 @@ import lombok.NoArgsConstructor;
 public class Account {
 
 	private String name;
+
+	@JsonSerialize(using = ToStringSerializer.class)
 	private LocalDateTime lastSeen;
 }

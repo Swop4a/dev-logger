@@ -1,6 +1,7 @@
 package com.devlogger.post.services;
 
 import com.devlogger.post.model.Post;
+import com.devlogger.post.model.Tab;
 import java.util.List;
 
 /**
@@ -9,11 +10,13 @@ import java.util.List;
  */
 public interface PostService {
 
-	List<Post> findAllInPreviewMode();
+	List<Post> findAllInPreviewMode(Tab tab, Boolean smart);
 
 	Post findPostById(String postId);
 
 	Post add(Post post);
 
 	Post updatePost(Post post);
+
+	void deletePost(String postId);
 }
