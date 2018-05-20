@@ -4,6 +4,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
+    // TODO: rework mocks
     const searchPosts = [
       {
         id: 1,

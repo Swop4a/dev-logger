@@ -5,6 +5,10 @@
   .posts__body, .posts__header {
     max-width: 960px;
     margin: 0 auto;
+
+    @media screen and (max-width: 1044px) {
+      margin: 0 24px;
+    }
   }
 
   .posts__body {
