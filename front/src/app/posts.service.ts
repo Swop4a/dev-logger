@@ -11,6 +11,7 @@ import { API_URL } from './consts';
 export class PostsService {
   private getPostsURL = `${API_URL}/getPosts`;
   private getPostURL = `${API_URL}/getPost`;
+
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
