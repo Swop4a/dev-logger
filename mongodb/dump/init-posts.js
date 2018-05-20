@@ -1,19 +1,5 @@
 print('START INIT POSTS');
 
-db.createUser(
-    {
-      user: "admin",
-      pwd: "admin",
-      roles: [
-        {
-          role: "userAdminAnyDatabase",
-          db: "admin"
-        }
-      ]
-    }
-);
-print('COMPLETE INIT POSTS');
-
 db.posts.update(
     {"_id": "welcome-post"},
     {
@@ -41,3 +27,5 @@ db.posts.update(
       "image" : "https://drive.google.com/file/d/1UmxUdPf-ClQk45pjGYJ7QKCV-8CpLfBE/view?usp=sharing"
     }
 );
+
+print('COMPLETE INIT POSTS');
