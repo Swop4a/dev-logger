@@ -10,17 +10,17 @@
     <div class="meta" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px">
       <span fxLayout="row" fxLayoutAlign="start" fxLayoutGap="8px">
         <svg-icon fxFlex="0 0" src="assets/star.svg"></svg-icon>
-        <span class="mat-caption">{{post.rating}}</span>
+        <span class="mat-caption">{{post.statistic.rating}}</span>
       </span>
 
       <span class="mat-caption" fxLayout="row" class="eye" fxLayoutAlign="start center" fxLayoutGap="8px">
         <svg-icon fxFlex="0 0" src="assets/eye.svg"></svg-icon>
-        <span class="mat-caption">{{post.views}}</span>
+        <span class="mat-caption">{{post.statistic.views}}</span>
       </span>
 
       <span class="mat-caption" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
         <svg-icon fxFlex="0 0" src="assets/calendar.svg"></svg-icon>
-        <span class="mat-caption">{{post.created | date:'shortDate'}}</span>
+        <span class="mat-caption">{{post.publicationDate | date:'shortDate'}}</span>
       </span>
     </div>
 

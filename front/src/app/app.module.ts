@@ -79,9 +79,9 @@ window.Quill.register('module/imageResize', ImageResize);
     MatTabsModule,
     FlexLayoutModule,
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
+    // ),
   ],
   providers: [
     PostsService,

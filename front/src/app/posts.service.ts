@@ -5,9 +5,11 @@ import { catchError, tap} from 'rxjs/operators';
 
 import { SearchPost } from './search-post';
 
+import { API_URL } from './consts';
+
 @Injectable()
 export class PostsService {
-  private searchPostsURL = 'api/searchPosts';
+  private searchPostsURL = API_URL;
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
