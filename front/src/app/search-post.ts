@@ -1,10 +1,12 @@
 export interface SearchPost {
-  id: number;
+  id: string;
   title: string;
   tags: string[];
-  rating: number;
-  views: number;
-  created: Date;
+  statistic: {
+    rating: number;
+    views: number;
+  };
+  publicationDate: Date;
   image: string;
   content: string;
 }

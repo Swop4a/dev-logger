@@ -9,7 +9,8 @@ import { API_URL } from './consts';
 
 @Injectable()
 export class PostsService {
-  private searchPostsURL = API_URL;
+  private getPostsURL = `${API_URL}/getPosts`;
+  private getPostURL = `${API_URL}/getPost`;
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -17,15 +18,15 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<SearchPost[]> {
-    return this.http.get<SearchPost[]>(this.searchPostsURL)
+    return this.http.get<SearchPost[]>(this.getPostsURL)
       .pipe(
         tap(heroes => this.log('posts fetched')),
         catchError(this.handleError('getPosts', [])),
       );
   }
 
-  getPost(id: number): Observable<SearchPost> {
-    return this.http.get<SearchPost>(`${this.searchPostsURL}/${id}`)
+  getPost(id: string): Observable<SearchPost> {
+    return this.http.get<SearchPost>(`${this.getPostURL}/${id}`)
       .pipe(
         tap(_ => this.log(`fetched post with id=${id}`)),
         catchError(this.handleError<SearchPost>('getPost')),
@@ -33,7 +34,7 @@ export class PostsService {
   }
 
   // updateHero(hero: SearchPost): Observable<any> {
-  //   return this.http.put(`${this.searchPostsURL}/${hero.id}`, hero, this.httpOptions)
+  //   return this.http.put(`${this.getPostsURL}/${hero.id}`, hero, this.httpOptions)
   //     .pipe(
   //       tap(_ => this.log(`updated hero with id=${hero.id}`)),
   //       catchError(this.handleError('updateHero')),
@@ -41,7 +42,7 @@ export class PostsService {
   // }
 
   // addHero(hero: SearchPost): Observable<SearchPost> {
-  //   return this.http.post<SearchPost>(this.searchPostsURL, hero)
+  //   return this.http.post<SearchPost>(this.getPostsURL, hero)
   //     .pipe(
   //       tap(_hero => this.log(`added hero id=${_hero.id}`)),
   //       catchError(this.handleError<SearchPost>('addHero')),
@@ -49,7 +50,7 @@ export class PostsService {
   // }
 
   // deleteHero(hero: SearchPost): Observable<any> {
-  //   return this.http.delete<SearchPost>(`${this.searchPostsURL}/${hero.id}`)
+  //   return this.http.delete<SearchPost>(`${this.getPostsURL}/${hero.id}`)
   //     .pipe(
   //       tap(_ => this.log(`deleted hero id=${hero.id}`)),
   //       catchError(this.handleError<SearchPost>('deleteHero')),
@@ -61,7 +62,7 @@ export class PostsService {
       return of([]);
     }
 
-    return this.http.get<SearchPost[]>(`${this.searchPostsURL}/?title=${term}`).pipe(
+    return this.http.get<SearchPost[]>(`${this.getPostsURL}/?title=${term}`).pipe(
       tap(_ => this.log(`found posts matching "${term}"`)),
       catchError(this.handleError<SearchPost[]>('searchPosts', []))
     );

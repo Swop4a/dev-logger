@@ -19,7 +19,7 @@ export class PostPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.posts.getPost(+this.route.snapshot.paramMap.get('id'))
+    this.posts.getPost(this.route.snapshot.paramMap.get('id'))
       .subscribe(post => this.post = post);
   }
 
