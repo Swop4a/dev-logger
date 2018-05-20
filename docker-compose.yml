@@ -59,6 +59,7 @@ services:
   post-mongodb:
     environment:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
+      INIT_DUMP: init-posts.js
     image: post-mongodb
     restart: always
     logging:
