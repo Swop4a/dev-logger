@@ -1,7 +1,7 @@
 <main class="main-page">
   <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px" class="posts__header">
     <mat-tab-group
-      [selectedIndex]="selectedPostsType$ | async"
+      [selectedIndex]="postsInfo.postsType"
       (selectedIndexChange)="changePostsType($event)"
     >
       <mat-tab label="Feed"></mat-tab>
@@ -11,8 +11,8 @@
     <span fxFlex class="posts__type"></span>
 
     <mat-slide-toggle
-      *ngIf="selectedPostsType$ | async"
-      [checked]="isSmartLenta$ | async"
+      *ngIf="postsInfo.postsType === 1"
+      [checked]="postsInfo.postsType.isSmart"
       (change)="toggleSmartLenta($event.checked)"
       class="posts__interesting-toggler"
       color="accent"

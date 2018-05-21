@@ -17,9 +17,7 @@ import { SearchPost } from '../search-post';
 })
 export class MainComponent implements OnInit {
   posts: SearchPost[];
-
-  isSmartLenta$: Observable<PostsState['isSmart']>;
-  selectedPostsType$: Observable<PostsState['postsType']>;
+  postsInfo: PostsState;
 
   constructor(
     public postsService: PostsService,
@@ -29,12 +27,8 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.postsService.getPosts().subscribe(posts => this.posts = posts);
 
-    this.selectedPostsType$ = this.store.select<PostsState>('posts').pipe(
-      map(state => state.postsType),
-    );
-
-    this.isSmartLenta$ = this.store.select<PostsState>('posts').pipe(
-      map(state => state.isSmart),
+    this.store.select<PostsState>('posts').subscribe(
+      postsInfo => this.postsInfo = postsInfo,
     );
   }
 

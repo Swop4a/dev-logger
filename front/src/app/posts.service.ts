@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap} from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+
+import { AppState } from './store/rootReducer';
+import { TOGGLE_POSTS, TOGGLE_SMART_POSTS, State as PostsState } from './store/posts';
 
 import { SearchPost } from './search-post';
 
@@ -12,14 +16,23 @@ export class PostsService {
   private getPostsURL = `${POSTS_SERVICE_URL}/getPosts`;
   private getPostURL = `${POSTS_SERVICE_URL}/getPost`;
 
+  private postsInfo: PostsState;
+
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private store: Store<AppState>,
+  ) {
+    this.store.select<PostsState>('posts').subscribe(
+      postsInfo => this.postsInfo = postsInfo,
+    );
+  }
 
   getPosts(): Observable<SearchPost[]> {
-    return this.http.get<SearchPost[]>(this.getPostsURL)
+    return this.http.get<SearchPost[]>(`${this.getPostsURL}?tab=${this.postsInfo.postsType}&smart=${this.postsInfo.isSmart}`)
       .pipe(
         tap(heroes => this.log('posts fetched')),
         catchError(this.handleError('getPosts', [])),
