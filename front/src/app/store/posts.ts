@@ -13,7 +13,7 @@ const initialState: State = {
   isSmart: true,
 };
 
-export const pagesReducer = (state: State = initialState, action: Action) => {
+export function postsReducer(state: State = initialState, action: Action) {
   switch (action.type) {
     case TOGGLE_POSTS:
       return {
@@ -30,4 +30,4 @@ export const pagesReducer = (state: State = initialState, action: Action) => {
     default:
       return state;
   }
-};
+}
