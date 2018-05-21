@@ -14,7 +14,7 @@ spring:
       enabled: false
 server:
   port: 8085
-  context-path: /post-service
+  context-path: /posts
 eureka:
   client:
     enabled: false
