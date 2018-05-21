@@ -29,30 +29,30 @@ public class PostController {
 	}
 
 	@JsonView(View.Preview.class)
-	@RequestMapping(path = "/getPosts", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
 	public List<Post> getPosts(@RequestParam Tab tab, @RequestParam Boolean smart) {
 		return postService.findAllInPreviewMode(tab, smart);
 	}
 
 	@JsonView(View.Full.class)
-	@RequestMapping(path = "/getPost/{postId}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "/{postId}", method = RequestMethod.GET, produces = "application/json")
 	public Post getPost(@PathVariable String postId) {
 		return postService.findPostById(postId);
 	}
 
 	@JsonView(View.Full.class)
-	@RequestMapping(path = "/createPost", method = RequestMethod.POST, produces = "application/json")
-	public Post add(@RequestBody Post post) {
+	@RequestMapping(path = "/", method = RequestMethod.POST, produces = "application/json")
+	public Post save(@RequestBody Post post) {
 		return postService.add(post);
 	}
 
 	@JsonView(View.Full.class)
-	@RequestMapping(path = "/updatePost", method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(path = "/", method = RequestMethod.PUT, produces = "application/json")
 	public Post updatePost(@RequestBody Post post) {
 		return postService.updatePost(post);
 	}
 
-	@RequestMapping(path = "/deletePost", method = RequestMethod.DELETE, produces = "application/json")
+	@RequestMapping(path = "/{postId}", method = RequestMethod.DELETE)
 	public void deletePost(@PathVariable String postId) {
 		postService.deletePost(postId);
 	}
