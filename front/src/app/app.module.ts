@@ -22,8 +22,11 @@ import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
 
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { postsReducer } from './store/posts';
+import { environment } from '../environments/environment';
+
+import { rootReducer } from './store/rootReducer';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -82,7 +85,11 @@ window.Quill.register('module/imageResize', ImageResize);
     MatTabsModule,
     FlexLayoutModule,
 
-    StoreModule.forRoot({ posts: postsReducer }),
+    StoreModule.forRoot(rootReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
 
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }

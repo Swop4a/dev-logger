@@ -208,6 +208,10 @@
   dependencies:
     tslib "^1.9.0"
 
+"@ngrx/store-devtools@^6.0.0-beta.3":
+  version "6.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-6.0.0-beta.3.tgz#899836165b6554c0f981054610293f6d0958d4de"
+
 "@ngrx/store@^6.0.0-beta.3":
   version "6.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-6.0.0-beta.3.tgz#584e0bb69c2ea75637a2c2adfb27fc08db98dc92"
