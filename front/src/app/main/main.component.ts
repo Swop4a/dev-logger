@@ -1,4 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import {
+  TOGGLE_POSTS,
+  TOGGLE_SMART_POSTS,
+  GET_POSTS,
+  State as PostsState,
+} from '../store/posts';
+import { AppState } from '../store/rootReducer';
 
 import { PostsService } from '../posts.service';
 import { SearchPost } from '../search-post';
@@ -10,21 +21,27 @@ import { SearchPost } from '../search-post';
   encapsulation: 2,
 })
 export class MainComponent implements OnInit {
-  posts: SearchPost[];
-  smartLenta = true;
-  selectedPostsType = 0;
+  postsState: PostsState;
 
   constructor(
-    public postsService: PostsService,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
-    this.postsService.getPosts().subscribe(posts => this.posts = posts);
+    this.store.select<PostsState>('posts').subscribe(
+      postsState => this.postsState = postsState,
+    );
+
+    this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
   }
 
   changePostsType(postsType: number) {
-    console.log(`Posts type changed to ${postsType}`);
-    // TODO: here we should perform request to another kind of posts
+    this.store.dispatch({ type: TOGGLE_POSTS, payload: postsType });
+    this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
   }
 
+  toggleSmartLenta(isSmart: boolean) {
+    this.store.dispatch({ type: TOGGLE_SMART_POSTS, payload: isSmart });
+    this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
+  }
 }
