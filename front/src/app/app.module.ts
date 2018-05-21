@@ -17,10 +17,13 @@ import {
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
-
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { QuillModule } from 'ngx-quill';
 import Quill from 'quill';
+
+import { StoreModule } from '@ngrx/store';
+
+import { postsReducer } from './store/posts';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -78,6 +81,8 @@ window.Quill.register('module/imageResize', ImageResize);
     MatDividerModule,
     MatTabsModule,
     FlexLayoutModule,
+
+    StoreModule.forRoot({ posts: postsReducer }),
 
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }

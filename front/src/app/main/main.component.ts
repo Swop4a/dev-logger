@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { TOGGLE_POSTS, TOGGLE_SMART_POSTS, State } from '../store/posts';
+import AppState from '../store/appState';
 
 import { PostsService } from '../posts.service';
 import { SearchPost } from '../search-post';
@@ -11,15 +15,19 @@ import { SearchPost } from '../search-post';
 })
 export class MainComponent implements OnInit {
   posts: SearchPost[];
+  postsInfo$: Observable<State>;
   smartLenta = true;
   selectedPostsType = 0;
 
   constructor(
     public postsService: PostsService,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
     this.postsService.getPosts().subscribe(posts => this.posts = posts);
+
+    this.postsInfo$ = this.store.select<State>('posts');
   }
 
   changePostsType(postsType: number) {
