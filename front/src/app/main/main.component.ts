@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import {
   TOGGLE_POSTS,
@@ -10,9 +8,6 @@ import {
   State as PostsState,
 } from '../store/posts';
 import { AppState } from '../store/rootReducer';
-
-import { PostsService } from '../posts.service';
-import { SearchPost } from '../search-post';
 
 @Component({
   selector: 'app-main',
@@ -28,6 +23,7 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // TODO: do it with selectors(dont pass here unnecessary data)
     this.store.select<PostsState>('posts').subscribe(
       postsState => this.postsState = postsState,
     );

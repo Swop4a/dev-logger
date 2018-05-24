@@ -12,7 +12,7 @@
 
     <mat-slide-toggle
       *ngIf="postsState.postsType === 1"
-      [checked]="postsState.postsType.isSmart"
+      [checked]="postsState.isSmart"
       (change)="toggleSmartLenta($event.checked)"
       class="posts__interesting-toggler"
       color="accent"
