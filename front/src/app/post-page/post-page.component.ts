@@ -2,8 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { Store, select } from '@ngrx/store';
+
+import {
+  GET_POST,
+  State as PostsState,
+} from '../store/posts';
+import { AppState } from '../store/rootReducer';
+
 import { SearchPost } from '../search-post';
-import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-page',
@@ -15,12 +22,19 @@ export class PostPageComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public posts: PostsService,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
-    this.posts.getPost(this.route.snapshot.paramMap.get('id'))
-      .subscribe(post => this.post = post);
-  }
+    this.store.select<PostsState>('posts').subscribe(
+      postsInfo => this.post = postsInfo.post,
+    );
 
+    this.store.dispatch({
+      type: GET_POST,
+      payload: {
+        id: this.route.snapshot.paramMap.get('id'),
+      },
+    });
+  }
 }

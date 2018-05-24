@@ -23,6 +23,7 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // TODO: do it with selectors(dont pass here unnecessary data)
     this.store.select<PostsState>('posts').subscribe(
       postsState => this.postsState = postsState,
     );
