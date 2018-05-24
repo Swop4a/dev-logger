@@ -1,4 +1,8 @@
-<main class="mat-typography" *ngIf="post">
-  <h1>Current post id: {{post.id}}</h1>
-  <h1>Current post title: {{post.title}}</h1>
+<main *ngIf="post">
+  <article>
+    <span class="mat-caption post__date">{{post.publicationDate | date:'medium'}}</span>
+    <h1 class="mat-headline post__title">{{post.title}}</h1>
+    <h3 class="mat-subheading-2 post__tags">{{post.tags.join(', ')}}</h3>
+    <p class="mat-body-1">{{post.content}}</p>
+  </article>
 </main>

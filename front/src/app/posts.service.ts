@@ -53,14 +53,6 @@ export class PostsService {
     ),
   );
 
-  // getPosts(): Observable<SearchPost[]> {
-  //   return this.http.get<SearchPost[]>(`${this.getPostsURL}?tab=${this.postsInfo.postsType}&smart=${this.postsInfo.isSmart}`)
-  //     .pipe(
-  //       tap(heroes => this.log('posts fetched')),
-  //       catchError(this.handleError('getPosts', [])),
-  //     );
-  // }
-
   @Effect()
   post$: Observable<GetPostCompletedAction> = this.actions$.pipe(
     ofType(GET_POST),
@@ -74,13 +66,6 @@ export class PostsService {
       )
     ),
   );
-  // getPost(id: string): Observable<SearchPost> {
-  //   return this.http.get<SearchPost>(`${this.getPostURL}/${id}`)
-  //     .pipe(
-  //       tap(_ => this.log(`fetched post with id=${id}`)),
-  //       catchError(this.handleError<SearchPost>('getPost')),
-  //     );
-  // }
 
   // updateHero(hero: SearchPost): Observable<any> {
   //   return this.http.put(`${this.getPostsURL}/${hero.id}`, hero, this.httpOptions)
@@ -106,19 +91,16 @@ export class PostsService {
   //     );
   // }
 
+  // TODO: rework
   searchPosts(term: string): Observable<SearchPost[]> {
     if (!term.trim()) {
       return of([]);
     }
 
     return this.http.get<SearchPost[]>(`${this.getPostsURL}/?title=${term}`).pipe(
-      tap(_ => this.log(`found posts matching "${term}"`)),
+      // tap(_ => this.log(`found posts matching "${term}"`)),
       catchError(this.handleError<SearchPost[]>('searchPosts', []))
     );
-  }
-
-  private log(message: string) {
-    console.log(message);
   }
 
   /**
@@ -134,7 +116,7 @@ export class PostsService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result);
