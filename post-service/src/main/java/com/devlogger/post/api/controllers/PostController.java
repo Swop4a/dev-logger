@@ -5,6 +5,7 @@ import com.devlogger.post.model.Tab;
 import com.devlogger.post.model.View;
 import com.devlogger.post.services.PostService;
 import com.fasterxml.jackson.annotation.JsonView;
+import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +30,15 @@ public class PostController {
 	}
 
 	@JsonView(View.Preview.class)
-	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
-	public List<Post> getPosts(@RequestParam Tab tab, @RequestParam Boolean smart) {
-		return postService.findAllInPreviewMode(tab, smart);
+	@RequestMapping(path = "/current", method = RequestMethod.GET, produces = "application/json")
+	public List<Post> getAccountPosts(@RequestParam String name, @RequestParam Tab tab, @RequestParam Boolean smart) {
+		return postService.findAllInPreviewMode(name, tab, smart);
+	}
+
+	@JsonView(View.Preview.class)
+	@RequestMapping(path = "/current", method = RequestMethod.GET, produces = "application/json")
+	public List<Post> getCurrentAccountPosts(Principal principal, @RequestParam Tab tab, @RequestParam Boolean smart) {
+		return postService.findAllInPreviewMode(principal.getName(), tab, smart);
 	}
 
 	@JsonView(View.Full.class)
@@ -47,8 +54,8 @@ public class PostController {
 	}
 
 	@JsonView(View.Full.class)
-	@RequestMapping(path = "/", method = RequestMethod.PUT, produces = "application/json")
-	public Post updatePost(@RequestBody Post post) {
+	@RequestMapping(path = "/{postId}", method = RequestMethod.PUT, produces = "application/json")
+	public Post updatePost(@PathVariable String postId, @RequestBody Post post) {
 		return postService.updatePost(post);
 	}
 
