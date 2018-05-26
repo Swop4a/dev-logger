@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,9 +18,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Account {
 
-	private Long id;
+	private String handle;
 	private String username;
 	private String image;
 	private String company;
@@ -40,4 +42,5 @@ public class Account {
 	private String telegram;
 	private String facebook;
 	private String vk;
+	private String linkedIn;
 }
