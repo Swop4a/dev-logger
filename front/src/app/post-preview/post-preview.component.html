@@ -1,0 +1,30 @@
+<div class="post-preview">
+  <!-- <img class="post-preview__image" src="{{post.image}}" alt="{{post.title}}"> -->
+  <img class="post-preview__image" src="assets/spaceHD.jpg" alt="{{post.title}}">
+
+  <h1 class="mat-headline post__title">{{post.title}}</h1>
+  <h3 class="mat-subheading-2 post__tags">{{post.tags.join(', ')}}</h3>
+
+  <p class="mat-body-1">{{post.content}}</p>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="meta" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px">
+      <span fxLayout="row" fxLayoutAlign="start" fxLayoutGap="8px">
+        <svg-icon fxFlex="0 0" src="assets/star.svg"></svg-icon>
+        <span class="mat-caption">{{post.statistic.rating}}</span>
+      </span>
+
+      <span class="mat-caption" fxLayout="row" class="eye" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <svg-icon fxFlex="0 0" src="assets/eye.svg"></svg-icon>
+        <span class="mat-caption">{{post.statistic.views}}</span>
+      </span>
+
+      <span class="mat-caption" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <svg-icon fxFlex="0 0" src="assets/calendar.svg"></svg-icon>
+        <span class="mat-caption">{{post.publicationDate | date:'shortDate'}}</span>
+      </span>
+    </div>
+
+    <button mat-button color="accent" (click)="seeMore()">SEE MORE</button>
+  </div>
+</div>

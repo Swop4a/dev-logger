@@ -1,0 +1,14 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        native:
+          search-locations: classpath:/shared
+  profiles:
+    active: native

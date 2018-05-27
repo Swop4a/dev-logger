@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: search-service
+  cloud:
+    config:
+      uri: http://${HOST}:8888
+      fail-fast: true

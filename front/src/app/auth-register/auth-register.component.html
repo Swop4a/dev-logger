@@ -1,0 +1,66 @@
+<main>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Login">
+          <form [formGroup]="loginForm" fxLayout="column" (ngSubmit)="onLogin()">
+            <mat-form-field >
+              <input
+                formControlName="username"
+                matInput
+                placeholder="username"
+              >
+            </mat-form-field>
+            <mat-form-field >
+              <input
+                formControlName="password"
+                matInput
+                placeholder="password"
+              >
+            </mat-form-field>
+
+            <div>
+              <button
+                mat-button
+                color="primary"
+                [disabled]="loginForm.pristine || loginForm.invalid"
+                type="submit">Go</button>
+            </div>
+          </form>
+        </mat-tab>
+        <mat-tab label="Sign up">
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()" fxLayout="column">
+            <mat-form-field >
+              <input
+                formControlName="username"
+                matInput
+                placeholder="username"
+              >
+            </mat-form-field>
+            <mat-form-field >
+              <input
+                formControlName="password"
+                matInput
+                placeholder="password"
+              >
+            </mat-form-field>
+            <mat-form-field >
+              <input
+                formControlName="confirmPassword"
+                matInput
+                placeholder="confirm password"
+              >
+            </mat-form-field>
+
+            <div>
+              <button
+                mat-button
+                [disabled]="registerForm.pristine || registerForm.invalid"
+                type="submit">Submit</button>
+            </div>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</main>

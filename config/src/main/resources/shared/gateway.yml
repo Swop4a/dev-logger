@@ -1,0 +1,13 @@
+server:
+  port: 4000
+zuul:
+  routes:
+    account-service:
+      path: /accounts/**
+      serviceId: account-service
+      stripPrefix: false
+
+    post-service:
+      path: /posts/**
+      serviceId: post-service
+      stripPrefix: false
