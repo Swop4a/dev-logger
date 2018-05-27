@@ -140,7 +140,7 @@ export class AccountEffects {
       `${this.authUrl}/current`,
       {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         }),
       },
     );

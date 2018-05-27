@@ -1,6 +1,18 @@
 <mat-card>
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
-    <mat-sidenav-content>Main content</mat-sidenav-content>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened fxLayout="column" fxLayoutAlign="start center">
+      <div class="grey-image"></div>
+      <h1 class="mat-headline title">Alexander Karelin</h1>
+      <p class="mat-body-2 bio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</p>
+
+      <div class="divider" fxFlex>
+        <app-divider></app-divider>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-post-preview *ngFor="let post of posts" [post]="post"></app-post-preview>
+      <span *ngIf="posts.length === 0">There are no posts... yet</span>
+    </mat-sidenav-content>
   </mat-sidenav-container>
 </mat-card>

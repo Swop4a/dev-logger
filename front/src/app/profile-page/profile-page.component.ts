@@ -36,7 +36,7 @@ export class ProfilePageComponent implements OnInit {
       account => this.user = account.user,
     );
     this.store.select<PostsState>('posts').subscribe(
-      postsData => this.posts = postsData.posts,
+      postsData => this.posts = postsData.userPosts,
     );
   }
 
