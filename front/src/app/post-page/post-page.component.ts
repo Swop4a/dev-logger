@@ -7,8 +7,8 @@ import { Store, select } from '@ngrx/store';
 import {
   GET_POST,
   State as PostsState,
-} from '../store/posts';
-import { AppState } from '../store/rootReducer';
+} from '../reducers/posts';
+import { AppState } from '../reducers/rootReducer';
 
 import { SearchPost } from '../search-post';
 

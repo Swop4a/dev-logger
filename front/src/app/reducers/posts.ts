@@ -1,6 +1,8 @@
 import { Action } from '@ngrx/store';
 import { SearchPost } from '../search-post';
 
+import { ActionWithPayload } from './rootReducer';
+
 export const TOGGLE_POSTS = 'TOGGLE_POSTS';
 export const TOGGLE_SMART_POSTS = 'TOGGLE_SMART_POSTS';
 export const GET_POSTS = 'GET_POSTS';
@@ -17,7 +19,10 @@ const initialState: State = {
   isSmart: false,
 };
 
-export function postsReducer(state: State = initialState, action: PostsAction): State {
+export function postsReducer(
+  state: State = initialState,
+  action: ActionWithPayload,
+): State {
   switch (action.type) {
     case TOGGLE_POSTS:
       return {
@@ -53,10 +58,6 @@ export interface State {
   isSmart: boolean;
   posts: SearchPost[];
   post?: SearchPost;
-}
-
-export interface PostsAction extends Action {
-  payload?: any;
 }
 
 export interface GetPostsAction extends Action {
