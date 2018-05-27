@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, tap, map, mergeMap } from 'rxjs/operators';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
@@ -49,25 +49,21 @@ export class PostsService {
   ) {}
 
   @Effect()
-  posts$: Observable<GetPostsCompletedAction> = this.actions$.pipe(
+  getPosts$: Observable<GetPostsCompletedAction> = this.actions$.pipe(
     ofType(GET_POSTS),
-    mergeMap((action: GetPostsAction) =>
-      this.http.get(
-        `${this.getPostsURL}/?tab=${action.payload.postsType}&smart=${action.payload.isSmart}`,
-      ).pipe(
-        map((data: SearchPost[]) => ({ type: GET_POSTS_COMPLETED, payload: data })),
+    mergeMap(({ payload }: GetPostsAction) => {
+      return this.getPosts(payload).pipe(
+        map((posts: SearchPost[]) => ({ type: GET_POSTS_COMPLETED, payload: posts })),
         catchError(() => of({ type: GET_POSTS_FAILED })),
-      ),
-    ),
+      );
+    }),
   );
 
   @Effect()
-  post$: Observable<GetPostCompletedAction> = this.actions$.pipe(
+  getPost$: Observable<GetPostCompletedAction> = this.actions$.pipe(
     ofType(GET_POST),
     mergeMap((action: GetPostAction) =>
-      this.http.get(
-        `${this.getPostsURL}/${action.payload.id}`,
-      ).pipe(
+      this.http.get(`${this.getPostsURL}/${action.payload.id}`).pipe(
         map((data: SearchPost) => ({ type: GET_POST_COMPLETED, payload: data })),
         catchError(() => of({ type: GET_POST_FAILED })),
       )
@@ -77,16 +73,24 @@ export class PostsService {
   @Effect()
   getUserPosts$: Observable<GetUserPostsSuccessAction> = this.actions$.pipe(
     ofType(GET_USER_POSTS),
-    withLatestFrom(this.store),
-    mergeMap(([_, storeState]) =>
-      this.http.get(
-        `${this.getPostsURL}/${storeState.account.user.username}`,
-      ).pipe(
+    mergeMap(() => {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      });
+
+      return this.getPosts({ postsType: 2, isSmart: null }, headers).pipe(
         map((posts: SearchPost[]) => ({ type: GET_USER_POSTS_SUCCESS, payload: posts })),
         catchError(() => of({ type: GET_USER_POSTS_SUCCESS })),
-      ),
-    ),
+      );
+    }),
   );
+
+  private getPosts(payload, headers?: HttpHeaders) {
+    return this.http.get(
+      `${this.getPostsURL}/?tab=${payload.postsType}&smart=${payload.isSmart}`,
+      { headers },
+    );
+  }
 
   // updateHero(hero: SearchPost): Observable<any> {
   //   return this.http.put(`${this.getPostsURL}/${hero.id}`, hero, this.httpOptions)

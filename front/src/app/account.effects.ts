@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, empty } from 'rxjs';
 import { pluck, mergeMap, catchError, map, tap } from 'rxjs/operators';
 
 import {
@@ -34,6 +34,10 @@ import {
   GetCurrentUserSuccessAction,
 } from './reducers/account.reducer';
 
+import {
+  GET_USER_POSTS,
+} from './reducers/posts';
+
 @Injectable()
 export class AccountEffects {
   private accountServiceURL = ACCOUNT_SERVICE_URL;
@@ -44,6 +48,7 @@ export class AccountEffects {
     private http: HttpClient,
     private router: Router,
   ) {}
+
   @Effect()
   registerUser$: Observable<RegisterUserSuccessAction> = this.actions$.pipe(
     ofType(REGISTER_USER),
@@ -60,7 +65,7 @@ export class AccountEffects {
         map((userData: User) => ({
           type: REGISTER_USER_COMPLETE,
           payload: userData,
-        }))
+        })),
       ),
     ),
     catchError(() => of({ type: REGISTER_USER_FAILURE }))
@@ -93,10 +98,13 @@ export class AccountEffects {
         const token = localStorage.getItem('token');
 
         return this.getCurrentUser(token).pipe(
-          map((userData) => ({
-            type: GET_CURRENT_USER_SUCCESS,
-            payload: userData,
-          })),
+          mergeMap((userData) => [
+            {
+              type: GET_CURRENT_USER_SUCCESS,
+              payload: userData,
+            },
+            { type: GET_USER_POSTS },
+          ]),
         );
       },
     ),
@@ -111,12 +119,6 @@ export class AccountEffects {
   }
 
   private requestToken(userData): Observable<string> {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      return of(token);
-    }
-
     return this.http.post<string>(this.authUrl, {
         ...userData,
         scope: 'ui',
@@ -125,7 +127,11 @@ export class AccountEffects {
       { headers: new HttpHeaders({ 'Authorization': 'Basic YnJvd3Nlcjo=' })
     }).pipe(
       map<any, string>((authData) => authData.access_token),
-      tap(newToken =>  localStorage.setItem('token', newToken))
+      tap(newToken =>  localStorage.setItem('token', newToken)),
+      catchError(() => {
+        localStorage.removeItem('token');
+        return empty();
+      }),
     );
   }
 

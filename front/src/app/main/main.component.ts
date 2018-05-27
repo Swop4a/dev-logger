@@ -22,6 +22,7 @@ export class MainComponent implements OnInit {
     private store: Store<AppState>,
   ) { }
 
+  // TODO: disable my posts
   ngOnInit() {
     this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
 
