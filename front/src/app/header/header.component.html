@@ -10,9 +10,15 @@
 
   <span class="fill-remaining-space"></span>
 
-  <app-searchbar></app-searchbar>
+  <!-- <app-searchbar></app-searchbar> -->
 
-  <a class="profile" routerLink="/profile">
+  <a *ngIf="isLoggedIn" class="profile" routerLink="/profile">
     <img src="assets/profile-photo@2x.webp" alt="profile"/>
   </a>
+
+  <a
+    *ngIf="!isLoggedIn"
+    mat-raised-button routerLink="register"
+    class="register"
+  >Login/Sign up</a>
 </mat-toolbar>

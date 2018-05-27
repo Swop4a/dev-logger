@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PostsService } from '../posts.service';
 import { SearchPost } from '../search-post';
 
+// TODO: rework
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',

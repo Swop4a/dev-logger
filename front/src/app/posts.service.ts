@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap, map, mergeMap } from 'rxjs/operators';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 
-import { AppState } from './store/rootReducer';
+import { AppState } from './reducers/rootReducer';
 import {
   GET_POSTS,
   GET_POSTS_COMPLETED,
@@ -19,7 +19,7 @@ import {
 
   GetPostAction,
   GetPostCompletedAction,
-} from './store/posts';
+} from './reducers/posts';
 
 import { SearchPost } from './search-post';
 

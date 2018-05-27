@@ -14,6 +14,7 @@ import {
   MatSlideToggleModule,
   MatDividerModule,
   MatTabsModule,
+  MatCardModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -26,7 +27,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { environment } from '../environments/environment';
 
-import { rootReducer } from './store/rootReducer';
+import { rootReducer } from './reducers/rootReducer';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -44,6 +45,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
 import { FooterComponent } from './footer/footer.component';
 import { DividerComponent } from './divider/divider.component';
+import { AuthRegisterComponent } from './auth-register/auth-register.component';
+
+import { AccountEffects } from './account.effects';
 
 window.Quill = Quill;
 
@@ -64,6 +68,7 @@ window.Quill.register('module/imageResize', ImageResize);
     PostPreviewComponent,
     FooterComponent,
     DividerComponent,
+    AuthRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +79,8 @@ window.Quill.register('module/imageResize', ImageResize);
     AngularSvgIconModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
+
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
@@ -83,18 +90,19 @@ window.Quill.register('module/imageResize', ImageResize);
     MatSlideToggleModule,
     MatDividerModule,
     MatTabsModule,
-    FlexLayoutModule,
+    MatCardModule,
 
     StoreModule.forRoot(rootReducer),
-    EffectsModule.forRoot([PostsService]),
+    EffectsModule.forRoot([PostsService, AccountEffects]),
+
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
 
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
-    // ),
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
+    ),
   ],
   providers: [
     PostsService,

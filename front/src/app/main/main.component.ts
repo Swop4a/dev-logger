@@ -6,8 +6,8 @@ import {
   TOGGLE_SMART_POSTS,
   GET_POSTS,
   State as PostsState,
-} from '../store/posts';
-import { AppState } from '../store/rootReducer';
+} from '../reducers/posts';
+import { AppState } from '../reducers/rootReducer';
 
 @Component({
   selector: 'app-main',
