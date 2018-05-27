@@ -4,10 +4,11 @@ spring:
       default-view-inclusion: true
   data:
     mongodb:
-      host: account-mongodb
+      host: ${HOST}
       port: 27017
-      username: user
-      password: ${MONGODB_PASSWORD}
-      database: dlogger
+      username: admin
+      password: admin
+      database: admin
 server:
   port: 8085
+  context-path: /posts

@@ -3,12 +3,12 @@ package com.devlogger.post.services.impl;
 import static com.devlogger.post.model.Tab.FEED;
 import static com.devlogger.post.model.Tab.MY_POSTS;
 
-import com.devlogger.post.client.AccountServiceClient;
 import com.devlogger.post.model.Account;
 import com.devlogger.post.model.Post;
 import com.devlogger.post.model.Tab;
 import com.devlogger.post.repository.PostRepository;
 import com.devlogger.post.services.PostService;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -23,18 +23,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostServiceImpl implements PostService {
 
-	//TODO extract this to proprties file
+	//TODO extract this to properties file
 	private static final Integer LIMIT = 1500;
 	private static final String NEW_PARAGRAPH = "\n\n";
 	private static final char DOT = '.';
 
 	private final PostRepository repository;
-	private final AccountServiceClient client;
 
 	@Autowired
-	public PostServiceImpl(PostRepository repository, AccountServiceClient client) {
+	public PostServiceImpl(PostRepository repository) {
 		this.repository = repository;
-		this.client = client;
 	}
 
 	@Override
@@ -42,12 +40,12 @@ public class PostServiceImpl implements PostService {
 		log.info("REQUEST FOR TAB {} AND SMART MODE IS {}", tab, smart);
 
 		if (MY_POSTS.equals(tab)) {
-			Account account = client.getAccountByName(name);
-			if (account == null) {
-				throw new RuntimeException("User not found");
-			}
+//			Account account = client.getAccountByName(name);
+//			if (account == null) {
+//				throw new RuntimeException("User not found");
+//			}
 
-			List<Long> ids = getFollowerIds(account);
+			List<Long> ids = Arrays.asList(1L, 2L, 3L, 4L);
 			if (smart) {
 				//TODO: it means that "show ONLY FOLLOWING'S posts with smart=true, delegate to other service"
 				return repository.findAll();

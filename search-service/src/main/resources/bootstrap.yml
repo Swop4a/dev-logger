@@ -3,5 +3,5 @@ spring:
     name: search-service
   cloud:
     config:
-      uri: http://config:8888
+      uri: http://${HOST}:8888
       fail-fast: true
