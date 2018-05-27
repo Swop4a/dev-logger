@@ -7,7 +7,7 @@ export class PasswordValidation {
     const confirmPassword = AC.value; // to get value in input tag
 
     if (password !== confirmPassword) {
-      return of({ MatchPassword: true });
+      return of({ matchPassword: true });
     } else {
       return of(null);
     }

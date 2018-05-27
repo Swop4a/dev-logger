@@ -74,7 +74,11 @@ export class AccountEffects {
           ...action.payload,
           scope: 'ui',
           grant_type: 'password',
-        }).pipe(
+        },
+        {
+          headers: new HttpHeaders({ 'Authorization': 'Basic YnJvd3Nlcjo=' }),
+        }
+      ).pipe(
           map<any, string>((authData) => authData.access_token)
         );
       },

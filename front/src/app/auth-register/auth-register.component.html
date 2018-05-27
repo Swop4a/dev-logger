@@ -24,12 +24,12 @@
                 mat-button
                 color="primary"
                 [disabled]="loginForm.pristine || loginForm.invalid"
-                type="submit">Go</button>
+                type="submit">GO</button>
             </div>
           </form>
         </mat-tab>
         <mat-tab label="Sign up">
-          <form [formGroup]="registerForm" (ngSubmit)="onRegister()" fxLayout="column">
+          <form [formGroup]="registerForm" fxLayout="column" (ngSubmit)="onRegister()">
             <mat-form-field >
               <input
                 formControlName="username"
@@ -56,7 +56,7 @@
               <button
                 mat-button
                 [disabled]="registerForm.pristine || registerForm.invalid"
-                type="submit">Submit</button>
+                type="submit">SUBMIT</button>
             </div>
           </form>
         </mat-tab>
