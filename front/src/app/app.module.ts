@@ -14,6 +14,7 @@ import {
   MatSlideToggleModule,
   MatDividerModule,
   MatTabsModule,
+  MatCardModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -78,6 +79,8 @@ window.Quill.register('module/imageResize', ImageResize);
     AngularSvgIconModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
+
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
@@ -87,7 +90,7 @@ window.Quill.register('module/imageResize', ImageResize);
     MatSlideToggleModule,
     MatDividerModule,
     MatTabsModule,
-    FlexLayoutModule,
+    MatCardModule,
 
     StoreModule.forRoot(rootReducer),
     EffectsModule.forRoot([PostsService, AccountEffects]),

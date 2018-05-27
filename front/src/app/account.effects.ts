@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { pluck, mergeMap, catchError, map, tap } from 'rxjs/operators';
 
-import { ACCOUNT_SERVICE_URL, AUTH_URL } from './consts';
+import {
+  ACCOUNT_SERVICE_URL,
+  AUTH_URL,
+} from './consts';
 
 import { User } from './user';
 
@@ -16,6 +20,7 @@ import {
 
   LOGIN,
   LOGIN_SUCCESS,
+  LOGIN_FAILURE,
 
   RegisterUserAction,
 
@@ -31,8 +36,10 @@ export class AccountEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
+    private router: Router,
   ) {}
 
+  @Effect()
   registerUser$: Observable<LoginAction> = this.actions$.pipe(
     ofType(REGISTER_USER),
     mergeMap(({ payload }: RegisterUserAction) =>
@@ -52,6 +59,7 @@ export class AccountEffects {
     ),
   );
 
+  @Effect()
   login$: Observable<LoginSuccessAction> = this.actions$.pipe(
     ofType(LOGIN),
     mergeMap(
@@ -84,12 +92,13 @@ export class AccountEffects {
           }),
         },
       ).pipe(
+        tap(_ => this.router.navigate(['/'])),
         map((userData: User) => ({
           type: LOGIN_SUCCESS,
           payload: userData,
         }))
       ),
     ),
+    catchError(() => of({ type: LOGIN_FAILURE })),
   );
-
 }

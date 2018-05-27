@@ -17,20 +17,29 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export interface State {
   user?: User;
+  isLoggedIn: boolean;
 }
 
 export const initialState: State = {
   user: null,
+  isLoggedIn: false,
 };
 
 export function reducer(state = initialState, action: ActionWithPayload): State {
   switch (action.type) {
-    case REGISTER_USER_COMPLETE:
+    case LOGIN_SUCCESS:
       return {
         ...state,
+        isLoggedIn: true,
         user: action.payload,
       };
 
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+      };
 
     default:
       return state;

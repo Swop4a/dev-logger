@@ -1,3 +1,70 @@
-<p>
-  auth-register works!
-</p>
+<main>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Login">
+          <form [formGroup]="loginForm" fxLayout="column" (ngSubmit)="onLogin()">
+            <mat-form-field >
+              <input
+                formControlName="username"
+                matInput
+                placeholder="username"
+              >
+            </mat-form-field>
+            <mat-form-field >
+              <input
+                formControlName="password"
+                matInput
+                placeholder="password"
+              >
+            </mat-form-field>
+
+            <div>
+              <button mat-button color="primary" type="submit">Go</button>
+            </div>
+          </form>
+        </mat-tab>
+        <mat-tab label="Registration">
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()" fxLayout="column">
+            <mat-form-field >
+              <input
+                formControlName="username"
+                matInput
+                placeholder="username"
+              >
+            </mat-form-field>
+            <mat-form-field >
+              <input
+                formControlName="password"
+                matInput
+                placeholder="password"
+              >
+            </mat-form-field>
+            <mat-form-field >
+              <input
+                formControlName="repeatPassword"
+                matInput
+                placeholder="repeat password"
+              >
+            </mat-form-field>
+
+            <div>
+              <button mat-button type="submit">Submit</button>
+            </div>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+
+      <!-- <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions> -->
+    </mat-card-content>
+  </mat-card>
+</main>
