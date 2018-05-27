@@ -97,9 +97,9 @@ window.Quill.register('module/imageResize', ImageResize);
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
 
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
-    // ),
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
+    ),
   ],
   providers: [
     PostsService,
