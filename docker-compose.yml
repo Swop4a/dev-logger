@@ -1,6 +1,8 @@
 version: '2.1'
 services:
   config:
+    environment:
+      HOST: config
     image: config
     restart: always
     logging:
@@ -9,6 +11,7 @@ services:
         max-file: "10"
 
   registry:
+
     image: registry
     restart: always
     depends_on:

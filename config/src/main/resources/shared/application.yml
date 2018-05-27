@@ -4,4 +4,4 @@ eureka:
   client:
     serviceUrl:
       fetchRegistry: true
-      defaultZone: http://registry:8761/eureka/
+      defaultZone: http://${HOST}:8761/eureka/
