@@ -10,6 +10,7 @@ export class ProfilePageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // console.log(getUser);
   }
 
 }
