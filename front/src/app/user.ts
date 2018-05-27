@@ -1,4 +1,18 @@
 export interface User {
-  login: string;
+  handle: string;
+  username: string;
+  image: string;
+  company: string;
+  rating: number;
+  interests: string[];
+  followers: User[];
+  following: User[];
+  since: Date;
   lastSeen: Date;
+  skype: string;
+  gitHub: string;
+  telegram: string;
+  facebook: string;
+  vk: string;
+  linkedIn: string;
 }

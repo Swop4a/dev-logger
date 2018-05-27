@@ -1,0 +1,7 @@
+@import '../styles/common';
+
+mat-card {
+  @include main-container(90px);
+
+  padding: 0;
+}

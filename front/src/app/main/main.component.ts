@@ -23,12 +23,12 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
+
     // TODO: do it with selectors(dont pass here unnecessary data)
     this.store.select<PostsState>('posts').subscribe(
       postsState => this.postsState = postsState,
     );
-
-    this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
   }
 
   changePostsType(postsType: number) {

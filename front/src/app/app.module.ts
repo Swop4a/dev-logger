@@ -15,6 +15,7 @@ import {
   MatDividerModule,
   MatTabsModule,
   MatCardModule,
+  MatSidenavModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -91,6 +92,7 @@ window.Quill.register('module/imageResize', ImageResize);
     MatDividerModule,
     MatTabsModule,
     MatCardModule,
+    MatSidenavModule,
 
     StoreModule.forRoot(rootReducer),
     EffectsModule.forRoot([PostsService, AccountEffects]),

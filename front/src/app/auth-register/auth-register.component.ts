@@ -33,6 +33,7 @@ export class AuthRegisterComponent implements OnInit {
   }
 
   // TODO: add errors handling
+  // TODO: block buttons on request
   createForms() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
