@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
  * @since 26/05/2018 13:49
  */
 @Component
-@Profile("dev")
 public class DevDataLoader {
 
 	@Bean
@@ -35,10 +33,10 @@ public class DevDataLoader {
 				.linkedIn("https://ru.linkedin.com/")
 				.image("https://drive.google.com/file/d/1UmxUdPf-ClQk45pjGYJ7QKCV-8CpLfBE/view?usp=sharing")
 				.interests(Arrays.asList("Java", "Spring", "Microservices"))
-				.lastSeen(LocalDateTime.now())
+//				.lastSeen(LocalDateTime.now())
 				.postIds(Collections.singletonList("welcome-post"))
 				.rating(BigDecimal.ONE)
-				.since(LocalDate.now())
+//				.since(LocalDate.now())
 				.build();
 
 			repository.save(parent);
@@ -55,10 +53,10 @@ public class DevDataLoader {
 				.linkedIn("https://ru.linkedin.com/")
 				.image("https://drive.google.com/file/d/1UmxUdPf-ClQk45pjGYJ7QKCV-8CpLfBE/view?usp=sharing")
 				.interests(Arrays.asList("Java", "Spring", "Microservices"))
-				.lastSeen(LocalDateTime.now())
+//				.lastSeen(LocalDateTime.now())
 				.postIds(Collections.emptyList())
 				.rating(BigDecimal.ZERO)
-				.since(LocalDate.now())
+//				.since(LocalDate.now())
 				.following(Collections.singletonList(parent))
 				.build();
 

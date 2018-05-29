@@ -1,8 +1,7 @@
 package com.devlogger.post.model;
 
+import com.devlogger.account.model.Account;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
@@ -35,11 +34,9 @@ public class Post {
 	@NonNull
 	private Statistic statistic;
 
-	@JsonSerialize(using = ToStringSerializer.class)
 	@NonNull
 	private LocalDateTime publicationDate;
 
-	@JsonSerialize(using = ToStringSerializer.class)
 	@NonNull
 	private LocalDateTime lastUpdate;
 

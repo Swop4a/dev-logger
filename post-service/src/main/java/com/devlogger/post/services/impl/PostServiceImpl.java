@@ -3,7 +3,8 @@ package com.devlogger.post.services.impl;
 import static com.devlogger.post.model.Tab.FEED;
 import static com.devlogger.post.model.Tab.MY_POSTS;
 
-import com.devlogger.post.model.Account;
+import com.devlogger.account.model.Account;
+import com.devlogger.post.client.AccountServiceClient;
 import com.devlogger.post.model.Post;
 import com.devlogger.post.model.Tab;
 import com.devlogger.post.repository.PostRepository;
@@ -29,10 +30,12 @@ public class PostServiceImpl implements PostService {
 	private static final char DOT = '.';
 
 	private final PostRepository repository;
+	private final AccountServiceClient client;
 
 	@Autowired
-	public PostServiceImpl(PostRepository repository) {
+	public PostServiceImpl(PostRepository repository, AccountServiceClient client) {
 		this.repository = repository;
+		this.client = client;
 	}
 
 	@Override
@@ -40,12 +43,12 @@ public class PostServiceImpl implements PostService {
 		log.info("REQUEST FOR TAB {} AND SMART MODE IS {}", tab, smart);
 
 		if (MY_POSTS.equals(tab)) {
-//			Account account = client.getAccountByName(name);
-//			if (account == null) {
-//				throw new RuntimeException("User not found");
-//			}
+			Account account = client.getAccountByName(name);
+			if (account == null) {
+				throw new RuntimeException("User not found");
+			}
 
-			List<Long> ids = Arrays.asList(1L, 2L, 3L, 4L);
+			List<Long> ids = getFollowerIds(account);
 			if (smart) {
 				//TODO: it means that "show ONLY FOLLOWING'S posts with smart=true, delegate to other service"
 				return repository.findAll();

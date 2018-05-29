@@ -12,7 +12,7 @@ import java.util.function.Function;
  * @since 20/05/2018 17:54
  */
 public enum Tab {
-	FEED, MY_POSTS;
+	FEED, MY_POSTS, OWN_POSTS;
 
 	private static final Map<String, Tab> ORDINAL_TO_TAB_MAP = Arrays.stream(values())
 		.collect(toMap(t -> String.valueOf(t.ordinal()), Function.identity()));

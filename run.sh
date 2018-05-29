@@ -1,12 +1,14 @@
 #!/bin/bash
 
+mvn clean install
+
 HOST='localhost'
 
 cd config
 mvn spring-boot:run &
 cd ../
 
-sleep 30s
+sleep 10s
 
 export HOST='localhost'
 

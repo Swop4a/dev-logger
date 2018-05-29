@@ -1,5 +1,10 @@
 server:
   port: 4000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
 zuul:
   routes:
     account-service:
