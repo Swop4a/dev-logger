@@ -1,9 +1,7 @@
 package com.devlogger.account.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -81,12 +79,11 @@ public class Account {
 	)
 	private List<Account> following;
 
+//	@JsonSerialize(using = ToStringSerializer.class)
+//	private LocalDate since;
 
-	@JsonSerialize(using = ToStringSerializer.class)
-	private LocalDate since;
-
-	@JsonSerialize(using = ToStringSerializer.class)
-	private LocalDateTime lastSeen;
+//	@JsonSerialize(using = ToStringSerializer.class)
+//	private LocalDateTime lastSeen;
 
 	private String skype;
 	private String gitHub;

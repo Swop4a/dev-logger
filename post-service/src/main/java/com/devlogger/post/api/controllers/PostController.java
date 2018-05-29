@@ -29,16 +29,10 @@ public class PostController {
 	}
 
 	@JsonView(View.Preview.class)
-	@RequestMapping(path = "/current", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
 	public List<Post> getAccountPosts(@RequestParam String name, @RequestParam Tab tab, @RequestParam Boolean smart) {
 		return postService.findAllInPreviewMode(name, tab, smart);
 	}
-
-//	@JsonView(View.Preview.class)
-//	@RequestMapping(path = "/current", method = RequestMethod.GET, produces = "application/json")
-//	public List<Post> getCurrentAccountPosts(Principal principal, @RequestParam Tab tab, @RequestParam Boolean smart) {
-//		return postService.findAllInPreviewMode(principal.getName(), tab, smart);
-//	}
 
 	@JsonView(View.Full.class)
 	@RequestMapping(path = "/{postId}", method = RequestMethod.GET, produces = "application/json")

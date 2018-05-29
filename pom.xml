@@ -18,6 +18,7 @@
 		<module>registry</module>
 		<module>search-service</module>
 		<module>export-service</module>
+		<module>common</module>
 	</modules>
 
 </project>

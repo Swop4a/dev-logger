@@ -1,6 +1,6 @@
 package com.devlogger.post;
 
-import com.devlogger.post.model.Account;
+import com.devlogger.account.model.Account;
 import com.devlogger.post.model.Post;
 import com.devlogger.post.model.PostType;
 import com.devlogger.post.model.Statistic;
@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Component;
  * @since 26/05/2018 13:52
  */
 @Component
-@Profile("dev")
 public class DevDataLoader {
 
 	@Bean
@@ -40,26 +38,40 @@ public class DevDataLoader {
 				.linkedIn("https://ru.linkedin.com/")
 				.image("https://drive.google.com/file/d/1UmxUdPf-ClQk45pjGYJ7QKCV-8CpLfBE/view?usp=sharing")
 				.interests(Arrays.asList("Java", "Spring", "Microservices"))
-				.lastSeen(LocalDateTime.now())
+//				.lastSeen(LocalDateTime.now())
 				.postIds(Collections.singletonList("welcome-post"))
 				.rating(BigDecimal.ONE)
-				.since(LocalDate.now())
+//				.since(LocalDate.now())
 				.build();
 
-			Post post = new Post();
-			post.setId("welcome-post");
-			post.setContent(
+			Post first = new Post();
+			first.setId("welcome-post");
+			first.setContent(
 				"\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"");
-			post.setImage("img");
-			post.setLastUpdate(LocalDateTime.now());
-			post.setPublicationDate(LocalDateTime.now());
-			post.setPublisher(account);
-			post.setStatistic(new Statistic(5L, 234L, 32L));
-			post.setTags(Arrays.asList("java", "microservices", "blog"));
-			post.setTitle("Welcome to Dev-logger post!");
-			post.setType(PostType.NEWS);
+			first.setImage("img");
+			first.setLastUpdate(LocalDateTime.now());
+			first.setPublicationDate(LocalDateTime.now());
+			first.setPublisher(account);
+			first.setStatistic(new Statistic(5L, 234L, 32L));
+			first.setTags(Arrays.asList("java", "microservices", "blog"));
+			first.setTitle("Welcome to Dev-logger post!");
+			first.setType(PostType.NEWS);
 
-			repository.save(post);
+			Post second = new Post();
+			second.setId("second");
+			second.setContent(
+				"\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"");
+			second.setImage("img");
+			second.setLastUpdate(LocalDateTime.now());
+			second.setPublicationDate(LocalDateTime.now());
+			second.setPublisher(account);
+			second.setStatistic(new Statistic(5L, 234L, 32L));
+			second.setTags(Arrays.asList("java", "microservices", "blog"));
+			second.setTitle("Welcome to Dev-logger post!");
+			second.setType(PostType.NEWS);
+
+			repository.save(first);
+			repository.save(second);
 		};
 	}
 }
