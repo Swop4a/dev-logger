@@ -29,7 +29,7 @@ public class AccountServiceImpl implements AccountService {
 
 		Account account = repository.findByHandle(handle);
 		if (account == null) {
-			log.warn("ACCOUNT {} IS EMPTY", handle);
+			log.error("ACCOUNT {} NOT FOUND", handle);
 			return null;
 		}
 

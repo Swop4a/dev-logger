@@ -2,14 +2,16 @@ package com.devlogger.post.services.impl;
 
 import static com.devlogger.post.model.Tab.FEED;
 import static com.devlogger.post.model.Tab.MY_POSTS;
+import static com.devlogger.post.model.Tab.OWN_POSTS;
 
 import com.devlogger.account.model.Account;
 import com.devlogger.post.client.AccountServiceClient;
+import com.devlogger.post.helpers.TextNormalizeHelper;
 import com.devlogger.post.model.Post;
 import com.devlogger.post.model.Tab;
 import com.devlogger.post.repository.PostRepository;
 import com.devlogger.post.services.PostService;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +26,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostServiceImpl implements PostService {
 
-	//TODO extract this to properties file
-	private static final Integer LIMIT = 1500;
-	private static final String NEW_PARAGRAPH = "\n\n";
-	private static final char DOT = '.';
-
 	private final PostRepository repository;
 	private final AccountServiceClient client;
 
@@ -39,13 +36,14 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> findAllInPreviewMode(String name, Tab tab, Boolean smart) {
+	public List<Post> findAllInPreviewMode(String handle, Tab tab, Boolean smart) {
 		log.info("REQUEST FOR TAB {} AND SMART MODE IS {}", tab, smart);
 
 		if (MY_POSTS.equals(tab)) {
-			Account account = client.getAccountByName(name);
+			Account account = client.getAccountByName(handle);
 			if (account == null) {
-				throw new RuntimeException("User not found");
+				log.error("ACCOUNT {} NOT FOUND");
+				return Collections.emptyList();
 			}
 
 			List<Long> ids = getFollowerIds(account);
@@ -53,14 +51,14 @@ public class PostServiceImpl implements PostService {
 				//TODO: it means that "show ONLY FOLLOWING'S posts with smart=true, delegate to other service"
 				return repository.findAll();
 			} else {
-				return repository.findAllByPublisherIdInAndOrderByPublicationDateDesc(ids).stream()
-					.peek(post -> {
-						String content = post.getContent();
-						String previewContent = getPreviewContent(content);
-						post.setContent(previewContent);
-					})
-					.collect(Collectors.toList());
+				List<Post> posts = repository.findAllByPublisherIdInAndOrderByPublicationDateDesc(ids);
+				return convertToPreviewMode(posts);
 			}
+		}
+
+		if (OWN_POSTS.equals(tab)) {
+			List<Post> posts = repository.findAllByPublisherHandleAndOrderByPublicationDateDesc(handle);
+			return convertToPreviewMode(posts);
 		}
 
 		if (FEED.equals(tab)) {
@@ -105,34 +103,19 @@ public class PostServiceImpl implements PostService {
 		repository.delete(postId);
 	}
 
-	private String getPreviewContent(String content) {
-		content = removeImagesFromContent(content);
-		content = normalizeContent(content);
-		content = content.substring(0, Math.min(content.length(), LIMIT));
-
-		int indexOfNewParagraph = content.lastIndexOf(NEW_PARAGRAPH);
-		int indexOfLastDot = content.lastIndexOf(DOT);
-
-		if (indexOfNewParagraph > indexOfLastDot) {
-			return content.substring(0, Math.max(0, indexOfNewParagraph));
-		} else {
-			return content.substring(0, Math.max(0, indexOfLastDot));
-		}
+	private List<Post> convertToPreviewMode(List<Post> posts) {
+		return posts.stream()
+			.peek(post -> {
+				String content = post.getContent();
+				String previewContent = TextNormalizeHelper.normalize(content);
+				post.setContent(previewContent);
+			})
+			.collect(Collectors.toList());
 	}
 
 	private List<Long> getFollowerIds(Account account) {
 		return account.getFollowers().stream()
 			.map(Account::getId)
 			.collect(Collectors.toList());
-	}
-
-	private String normalizeContent(String content) {
-		//TODO remove all <h1>, <p> etc...
-		return content;
-	}
-
-	private String removeImagesFromContent(String content) {
-		//TODO remove all images by regexp
-		return content;
 	}
 }

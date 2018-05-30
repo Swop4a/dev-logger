@@ -30,8 +30,8 @@ public class PostController {
 
 	@JsonView(View.Preview.class)
 	@RequestMapping(path = "/", method = RequestMethod.GET, produces = "application/json")
-	public List<Post> getAccountPosts(@RequestParam String name, @RequestParam Tab tab, @RequestParam Boolean smart) {
-		return postService.findAllInPreviewMode(name, tab, smart);
+	public List<Post> getAccountPosts(@RequestParam String handle, @RequestParam Tab tab, @RequestParam Boolean smart) {
+		return postService.findAllInPreviewMode(handle, tab, smart);
 	}
 
 	@JsonView(View.Full.class)
