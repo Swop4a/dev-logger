@@ -2,6 +2,7 @@ package com.devlogger.post.repository;
 
 import com.devlogger.post.model.Post;
 import java.util.List;
+import javafx.geometry.Pos;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,7 @@ public interface PostRepository extends MongoRepository<Post, String> {
 
 	@Query("{\"publisher.id\": { $in: ?0}}")
 	List<Post> findAllByPublisherIdInAndOrderByPublicationDateDesc(List<Long> ids);
+
+	@Query(value = "{ 'publisher.handle' : ?0 }", fields = "{ 'publisher.handle': 0 }")
+	List<Post> findAllByPublisherHandleAndOrderByPublicationDateDesc(String handle);
 }

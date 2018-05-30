@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface PostService {
 
-	List<Post> findAllInPreviewMode(String name, Tab tab, Boolean smart);
+	List<Post> findAllInPreviewMode(String handle, Tab tab, Boolean smart);
 
 	Post findPostById(String postId);
 

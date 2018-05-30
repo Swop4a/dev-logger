@@ -20,11 +20,13 @@ cd gateway
 mvn spring-boot:run &
 cd ../
 
-cd post-service
+cd account-service
 mvn spring-boot:run &
 cd ../
 
-cd account-service
+sleep 5s
+
+cd post-service
 mvn spring-boot:run &
 cd ../
 
