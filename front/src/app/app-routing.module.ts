@@ -7,13 +7,19 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { MainComponent } from './main/main.component';
 import { AuthRegisterComponent} from './auth-register/auth-register.component';
 
+import { AuthGuard } from './auth-guard.service';
+
 // TODO: add redirect from login to profile if user is logged in and vise versa
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'create', component: CreatePostComponent },
   { path: 'posts/:id', component: PostPageComponent },
   { path: 'register', component: AuthRegisterComponent },
-  { path: 'profile', component: ProfilePageComponent },
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
