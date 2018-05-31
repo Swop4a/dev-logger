@@ -15,11 +15,13 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router,
               private store$: Store<AppState>) { }
 
-  canActivate() {
+  OnInit() {
     this.store$.select<UserState>('account').subscribe(
       userData => this.status = userData.isLoggedIn,
     );
+  }
 
+  canActivate() {
     if (this.status) {
       return true;
     }

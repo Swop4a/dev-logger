@@ -1,3 +1,9 @@
+export interface Favorite {
+  postId: string;
+  accounts: string[];
+  time: Date;
+}
+
 export interface User {
   handle: string;
   username: string;
