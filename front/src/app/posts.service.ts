@@ -87,7 +87,7 @@ export class PostsService {
 
   private getPosts(payload, headers?: HttpHeaders) {
     return this.http.get(
-      `${this.getPostsURL}/?tab=${payload.postsType}&smart=${payload.isSmart}`,
+      `${this.getPostsURL}/?handle=PProgrammer&tab=${payload.postsType}&smart=${payload.isSmart}`,
       { headers },
     );
   }

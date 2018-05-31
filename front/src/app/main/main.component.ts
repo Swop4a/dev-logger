@@ -6,6 +6,7 @@ import {
   TOGGLE_SMART_POSTS,
   GET_POSTS,
   State as PostsState,
+  GetPostsAction,
 } from '../reducers/posts';
 import { AppState } from '../reducers/rootReducer';
 
@@ -24,12 +25,18 @@ export class MainComponent implements OnInit {
 
   // TODO: disable my posts
   ngOnInit() {
-    this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
-
     // TODO: do it with selectors(dont pass here unnecessary data)
     this.store.select<PostsState>('posts').subscribe(
       postsState => this.postsState = postsState,
     );
+
+    this.store.dispatch<GetPostsAction>({
+      type: GET_POSTS,
+      payload: {
+        postsType: this.postsState.postsType,
+        isSmart: this.postsState.isSmart,
+      },
+    });
   }
 
   changePostsType(postsType: number) {
