@@ -14,6 +14,7 @@
             <input
               formControlName="password"
               matInput
+              type="password"
               placeholder="password"
             >
           </mat-form-field>
@@ -27,7 +28,7 @@
           </div>
         </form>
       </mat-tab>
-      <mat-tab label="Sign up">
+      <mat-tab label="Sign up" disabled>
         <form [formGroup]="registerForm" fxLayout="column" (ngSubmit)="onRegister()">
           <mat-form-field >
             <input

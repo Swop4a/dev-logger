@@ -8,6 +8,9 @@ import {
   State as PostsState,
   GetPostsAction,
 } from '../reducers/posts';
+import {
+  State as AccountState,
+} from '../reducers/account.reducer';
 import { AppState } from '../reducers/rootReducer';
 
 @Component({
@@ -18,6 +21,7 @@ import { AppState } from '../reducers/rootReducer';
 })
 export class MainComponent implements OnInit {
   postsState: PostsState;
+  isLoggedIn = false;
 
   constructor(
     private store: Store<AppState>,
@@ -28,6 +32,9 @@ export class MainComponent implements OnInit {
     // TODO: do it with selectors(dont pass here unnecessary data)
     this.store.select<PostsState>('posts').subscribe(
       postsState => this.postsState = postsState,
+    );
+    this.store.select<AccountState>('account').subscribe(
+      userData => this.isLoggedIn = userData.isLoggedIn,
     );
 
     this.store.dispatch<GetPostsAction>({

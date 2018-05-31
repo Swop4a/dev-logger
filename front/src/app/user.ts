@@ -7,6 +7,7 @@ export interface User {
   interests: string[];
   followers: User[];
   following: User[];
+  favorites: string[];
   since: Date;
   lastSeen: Date;
   skype: string;

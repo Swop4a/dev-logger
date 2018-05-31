@@ -12,8 +12,10 @@
 
   <!-- <app-searchbar></app-searchbar> -->
 
+  <!-- <a *ngIf="isLoggedIn" class="profile" routerLink="/profile" fxLayout="row" fxLayoutAlign="right center"> -->
   <a *ngIf="isLoggedIn" class="profile" routerLink="/profile">
-    <img src="assets/profile-photo@2x.webp" alt="profile"/>
+    <!-- <h4>{{user.username}}</h4> -->
+    <img src="{{user.image}}" alt="profile"/>
   </a>
 
   <a
