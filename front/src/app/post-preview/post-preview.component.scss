@@ -3,6 +3,16 @@
   margin: 0 auto;
   margin-bottom: 65px;
 
+  & > div {
+    width: 100%;
+  }
+
+  &_profile {
+    padding: 16px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26), 0 2px 10px 0 rgba(0,0,0,0.16);
+  }
+
   .post-preview__image {
     float: right;
     width: 241px;

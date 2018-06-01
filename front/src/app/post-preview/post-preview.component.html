@@ -1,4 +1,4 @@
-<div class="post-preview">
+<div class="post-preview" [ngClass]="{ 'post-preview_profile': hideContent }">
   <img class="post-preview__image" src="{{post.image}}" alt="{{post.title}}">
 
   <h1 class="mat-headline post__title">{{post.title}}</h1>
