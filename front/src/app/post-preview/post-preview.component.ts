@@ -10,6 +10,7 @@ import { SearchPost } from '../search-post';
 })
 export class PostPreviewComponent implements OnInit {
   @Input() post: SearchPost;
+  @Input() hideContent: boolean;
 
   constructor(private router: Router) { }
 

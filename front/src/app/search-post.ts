@@ -11,12 +11,9 @@ export interface SearchPost {
   tags: string[];
   type: string;
   content: string;
+  rating: number;
   comments: Comment[];
-  statistic: {
-    rating: number;
-    views: number;
-    downloads: number;
-  };
+  commentsCount: number;
   publicationDate: Date;
   lastUpdate: Date;
   publisher: {

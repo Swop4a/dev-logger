@@ -12,16 +12,15 @@ import { State as UserState } from './reducers/account.reducer';
 })
 export class AuthGuard implements CanActivate {
   status: boolean;
+
   constructor(private router: Router,
               private store$: Store<AppState>) { }
 
-  OnInit() {
+  canActivate() {
     this.store$.select<UserState>('account').subscribe(
       userData => this.status = userData.isLoggedIn,
     );
-  }
 
-  canActivate() {
     if (this.status) {
       return true;
     }
