@@ -13,6 +13,8 @@ import {
 } from '../reducers/account.reducer';
 import { AppState } from '../reducers/rootReducer';
 
+import { Favorite } from '../user';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -22,6 +24,7 @@ import { AppState } from '../reducers/rootReducer';
 export class MainComponent implements OnInit {
   postsState: PostsState;
   isLoggedIn = false;
+  favorites: Favorite[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -34,7 +37,10 @@ export class MainComponent implements OnInit {
       postsState => this.postsState = postsState,
     );
     this.store.select<AccountState>('account').subscribe(
-      userData => this.isLoggedIn = userData.isLoggedIn,
+      userData => {
+        this.isLoggedIn = userData.isLoggedIn;
+        this.favorites = userData.user ? userData.user.favorites : [];
+      }
     );
 
     this.store.dispatch<GetPostsAction>({
@@ -54,5 +60,9 @@ export class MainComponent implements OnInit {
   toggleSmartLenta(isSmart: boolean) {
     this.store.dispatch({ type: TOGGLE_SMART_POSTS, payload: isSmart });
     this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
+  }
+
+  checkIsFavorite(postID) {
+    return !!this.favorites.find(_ => _.postId === postID);
   }
 }

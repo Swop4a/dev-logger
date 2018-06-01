@@ -22,6 +22,6 @@
   <app-divider></app-divider>
 
   <div class="posts__body">
-    <app-post-preview *ngFor="let post of postsState.posts" [post]="post"></app-post-preview>
+    <app-post-preview *ngFor="let post of postsState.posts" [post]="post" [isFavorite]="checkIsFavorite(post.id)"></app-post-preview>
   </div>
 </main>

@@ -9,8 +9,13 @@
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="meta" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px">
       <span fxLayout="row" fxLayoutAlign="start" fxLayoutGap="8px">
-        <svg-icon fxFlex="0 0" src="assets/star.svg"></svg-icon>
-        <span class="mat-caption">{{post.rating}}</span>
+        <svg-icon
+        fxFlex="0 0"
+        [ngClass]="{'active': isFavorite, 'inactive': !isFavorite}"
+        src="assets/star.svg"
+        [svgStyle]="{'width.px': 20 }"
+        ></svg-icon>
+        <span class="mat-caption" >{{post.rating}}</span>
       </span>
 
       <span class="mat-caption" fxLayout="row" class="eye" fxLayoutAlign="start center" fxLayoutGap="8px">
