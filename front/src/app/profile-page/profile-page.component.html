@@ -1,9 +1,10 @@
 <mat-card>
   <mat-sidenav-container>
     <mat-sidenav mode="side" opened fxLayout="column" fxLayoutAlign="start center">
-      <div class="grey-image"></div>
-      <h1 class="mat-headline title">Alexander Karelin</h1>
-      <p class="mat-body-2 bio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</p>
+      <img [src]="user.image" class="grey-image">
+      <h1 class="mat-headline title">{{user.username}}</h1>
+      <p class="mat-body-1 company">{{user.company}}</p>
+      <p class="mat-body-2 tags">{{user.interests.join(', ')}}</p>
 
       <div class="divider" fxFlex>
         <app-divider></app-divider>

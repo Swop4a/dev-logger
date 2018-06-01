@@ -24,19 +24,23 @@ mat-sidenav-content {
 .grey-image {
   width: 96px;
   height: 96px;
-  border-radius: 50%;
-  background-color: grey;
 }
 
 .title {
   text-align: center;
   margin-top: 16px;
+  margin-bottom: 8px;
 }
 
-.bio {
+.company {
   text-align: center;
+  margin-top: 0;
 }
 
 .divider {
   position: relative;
+}
+
+.tags {
+  text-align: center;
 }
