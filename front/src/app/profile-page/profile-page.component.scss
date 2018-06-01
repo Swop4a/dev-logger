@@ -1,0 +1,46 @@
+@import '../styles/common';
+
+mat-card {
+  @include main-container(90px);
+
+  padding: 0;
+  height: calc(100vh - 85px - 64px - 180px);
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 256px;
+  padding: 24px 24px 0;
+}
+
+mat-sidenav-content {
+  padding: 50px 69px 0 81px;
+  box-sizing: border-box;
+}
+
+.grey-image {
+  width: 96px;
+  height: 96px;
+}
+
+.title {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.company {
+  text-align: center;
+  margin-top: 0;
+}
+
+.divider {
+  position: relative;
+}
+
+.tags {
+  text-align: center;
+}

@@ -32,6 +32,8 @@ export class AuthRegisterComponent implements OnInit {
     this.createForms();
   }
 
+  // TODO: add errors handling
+  // TODO: block buttons on request
   createForms() {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -52,21 +54,6 @@ export class AuthRegisterComponent implements OnInit {
       type: LOGIN,
       payload: formModel,
     });
-
-    // deep copy of form model lairs
-    // const secretLairsDeepCopy: Address[] = formModel.secretLairs.map(
-    //   (address: Address) => Object.assign({}, address)
-    // );
-
-    // return new `Hero` object containing a combination of original hero value(s)
-    // and deep copies of changed form model values
-    // const saveHero: Hero = {
-    //   id: this.hero.id,
-    //   name: formModel.name as string,
-      // addresses: formModel.secretLairs // <-- bad!
-    //   addresses: secretLairsDeepCopy
-    // };
-    // return saveHero;
   }
 
   onRegister() {

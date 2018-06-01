@@ -1,4 +1,4 @@
-<mat-toolbar  class="mat-typography" role="header">
+<mat-toolbar role="header">
   <a class="logo" routerLink="">
     <img
       srcset="assets/full-logo-white.png 320w,
@@ -12,8 +12,10 @@
 
   <!-- <app-searchbar></app-searchbar> -->
 
+  <!-- <a *ngIf="isLoggedIn" class="profile" routerLink="/profile" fxLayout="row" fxLayoutAlign="right center"> -->
   <a *ngIf="isLoggedIn" class="profile" routerLink="/profile">
-    <img src="assets/profile-photo@2x.webp" alt="profile"/>
+    <span class="mat-subheading-2">{{user.username}}</span>
+    <img src="{{user.image}}" alt="profile"/>
   </a>
 
   <a

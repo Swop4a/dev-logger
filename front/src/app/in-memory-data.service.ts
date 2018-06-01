@@ -13,11 +13,11 @@ export class InMemoryDataService implements InMemoryDbService {
         tags: ['java', 'hyava', 'allah', 'babah'],
         type: 'novost',
         lastUpdate: new Date(),
-        statistic: {
-          rating: 200,
-          views: 700,
-          downloads: 1000,
-        },
+        // statistic: {
+        //   rating: 200,
+        //   views: 700,
+        //   downloads: 1000,
+        // },
         publicationDate: new Date(),
         publisher: {
           name: 'Biba boy',
@@ -32,11 +32,11 @@ export class InMemoryDataService implements InMemoryDbService {
         tags: ['java', 'hyava', 'allah', 'babah'],
         type: 'novost',
         lastUpdate: new Date(),
-        statistic: {
-          rating: 200,
-          views: 700,
-          downloads: 1000,
-        },
+        // statistic: {
+        //   rating: 200,
+        //   views: 700,
+        //   downloads: 1000,
+        // },
         publicationDate: new Date(),
         publisher: {
           name: 'Biba boy',
@@ -51,11 +51,11 @@ export class InMemoryDataService implements InMemoryDbService {
         tags: ['java', 'hyava', 'allah', 'babah'],
         type: 'novost',
         lastUpdate: new Date(),
-        statistic: {
-          rating: 200,
-          views: 700,
-          downloads: 1000,
-        },
+        // statistic: {
+        //   rating: 200,
+        //   views: 700,
+        //   downloads: 1000,
+        // },
         publicationDate: new Date(),
         publisher: {
           name: 'Biba boy',
@@ -70,11 +70,11 @@ export class InMemoryDataService implements InMemoryDbService {
         tags: ['netuvremeni', 'ebalrot', 'antihype'],
         type: 'biba type',
         lastUpdate: new Date(),
-        statistic: {
-          rating: 200,
-          views: 700,
-          downloads: 1000,
-        },
+        // statistic: {
+        //   rating: 200,
+        //   views: 700,
+        //   downloads: 1000,
+        // },
         publisher: {
           name: 'Biba boy',
           lastSeen: new Date(),

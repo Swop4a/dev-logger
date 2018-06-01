@@ -7,16 +7,9 @@ export class PasswordValidation {
     const confirmPassword = AC.value; // to get value in input tag
 
     if (password !== confirmPassword) {
-      return of({ MatchPassword: true });
+      return of({ matchPassword: true });
     } else {
       return of(null);
     }
   }
 }
-
-// export function matchPasswordValidator(nameRe: RegExp): ValidatorFn {
-//   return (control: AbstractControl): {[key: string]: any} => {
-//     const forbidden = nameRe.test(control.value);
-//     return forbidden ? {'forbiddenName': {value: control.value}} : null;
-//   };
-// }

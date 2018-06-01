@@ -6,10 +6,13 @@ import { SearchPost } from '../search-post';
 @Component({
   selector: 'app-post-preview',
   templateUrl: './post-preview.component.html',
+  encapsulation: 2,
   styleUrls: ['./post-preview.component.scss']
 })
 export class PostPreviewComponent implements OnInit {
   @Input() post: SearchPost;
+  @Input() hideContent: boolean;
+  @Input() isFavorite: boolean;
 
   constructor(private router: Router) { }
 

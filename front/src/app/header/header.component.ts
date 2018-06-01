@@ -8,6 +8,8 @@ import {
 } from '../reducers/account.reducer';
 import { AppState } from '../reducers/rootReducer';
 
+import { User } from '../user';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,6 +17,7 @@ import { AppState } from '../reducers/rootReducer';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
+  user: User;
 
   constructor(
     private store: Store<AppState>,
@@ -22,7 +25,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.store.select<AccountState>('account').subscribe(
-      accountData => this.isLoggedIn = accountData.isLoggedIn,
+      accountData => {
+        this.isLoggedIn = accountData.isLoggedIn;
+        this.user = accountData.user;
+      }
     );
   }
 

@@ -12,10 +12,10 @@
 
   // all of these variables contain many additional variables
   .meta {
-    border: solid 1px mat-color($accent);
+    border: solid 1px mat-color($primary);
   }
 
   svg-icon {
-    color: mat-color($accent);
+    color: mat-color($primary);
   }
 }

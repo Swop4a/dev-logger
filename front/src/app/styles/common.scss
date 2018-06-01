@@ -1,0 +1,8 @@
+@mixin main-container($marginTop: 0, $marginBottom: 0) {
+  max-width: 960px;
+  margin: $marginTop auto $marginBottom;
+
+  @media screen and (max-width: 1044px) {
+    margin: $marginTop 24px $marginBottom;
+  }
+}

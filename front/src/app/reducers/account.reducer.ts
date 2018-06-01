@@ -7,6 +7,10 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const REGISTER_USER_COMPLETE = 'REGISTER_USER_COMPLETE';
 export const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
 
+export const GET_CURRENT_USER = 'GET_CURRENT_USER';
+export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS';
+export const GET_CURRENT_USER_FAILURE = 'GET_CURRENT_USER_FAILURE';
+
 export const GET_AUTH_TOKEN = 'GET_AUTH_TOKEN';
 export const GET_AUTH_TOKEN_SUCCESS = 'GET_AUTH_TOKEN_SUCCESS';
 export const GET_AUTH_TOKEN_FAILURE = 'GET_AUTH_TOKEN_FAILURE';
@@ -41,6 +45,12 @@ export function reducer(state = initialState, action: ActionWithPayload): State 
         user: null,
       };
 
+    case GET_CURRENT_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+      };
+
     default:
       return state;
   }
@@ -53,6 +63,10 @@ export interface RegisterUserAction extends Action {
   };
 }
 
+export interface RegisterUserSuccessAction extends Action {
+  payload?: User;
+}
+
 
 export interface LoginAction extends Action {
   payload?: {
@@ -62,5 +76,9 @@ export interface LoginAction extends Action {
 }
 
 export interface LoginSuccessAction extends Action {
+  payload?: User;
+}
+
+export interface GetCurrentUserSuccessAction extends Action {
   payload?: User;
 }

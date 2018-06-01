@@ -5,7 +5,7 @@
       (selectedIndexChange)="changePostsType($event)"
     >
       <mat-tab label="Feed"></mat-tab>
-      <mat-tab label="My posts"></mat-tab>
+      <mat-tab label="My posts" [disabled]="!isLoggedIn"></mat-tab>
     </mat-tab-group>
 
     <span fxFlex class="posts__type"></span>
@@ -22,6 +22,6 @@
   <app-divider></app-divider>
 
   <div class="posts__body">
-    <app-post-preview *ngFor="let post of postsState.posts" [post]="post"></app-post-preview>
+    <app-post-preview *ngFor="let post of postsState.posts" [post]="post" [isFavorite]="checkIsFavorite(post.id)"></app-post-preview>
   </div>
 </main>

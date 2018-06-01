@@ -6,8 +6,14 @@ import {
   TOGGLE_SMART_POSTS,
   GET_POSTS,
   State as PostsState,
+  GetPostsAction,
 } from '../reducers/posts';
+import {
+  State as AccountState,
+} from '../reducers/account.reducer';
 import { AppState } from '../reducers/rootReducer';
+
+import { Favorite } from '../user';
 
 @Component({
   selector: 'app-main',
@@ -17,18 +23,33 @@ import { AppState } from '../reducers/rootReducer';
 })
 export class MainComponent implements OnInit {
   postsState: PostsState;
+  isLoggedIn = false;
+  favorites: Favorite[] = [];
 
   constructor(
     private store: Store<AppState>,
   ) { }
 
+  // TODO: disable my posts
   ngOnInit() {
     // TODO: do it with selectors(dont pass here unnecessary data)
     this.store.select<PostsState>('posts').subscribe(
       postsState => this.postsState = postsState,
     );
+    this.store.select<AccountState>('account').subscribe(
+      userData => {
+        this.isLoggedIn = userData.isLoggedIn;
+        this.favorites = userData.user ? userData.user.favorites : [];
+      }
+    );
 
-    this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
+    this.store.dispatch<GetPostsAction>({
+      type: GET_POSTS,
+      payload: {
+        postsType: this.postsState.postsType,
+        isSmart: this.postsState.isSmart,
+      },
+    });
   }
 
   changePostsType(postsType: number) {
@@ -39,5 +60,9 @@ export class MainComponent implements OnInit {
   toggleSmartLenta(isSmart: boolean) {
     this.store.dispatch({ type: TOGGLE_SMART_POSTS, payload: isSmart });
     this.store.dispatch({ type: GET_POSTS, payload: this.postsState });
+  }
+
+  checkIsFavorite(postID) {
+    return !!this.favorites.find(_ => _.postId === postID);
   }
 }
