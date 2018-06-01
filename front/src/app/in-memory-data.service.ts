@@ -6,7 +6,8 @@ import { SearchPost } from './search-post';
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const searchPosts: SearchPost[] = [
+    // const searchPosts: SearchPost[] = [
+    const searchPosts = [
       {
         id: 'someUnicID1',
         title: 'Vassa pupkin killed his grandmother',
