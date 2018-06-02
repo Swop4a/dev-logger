@@ -30,7 +30,6 @@ export class MainComponent implements OnInit {
     private store: Store<AppState>,
   ) { }
 
-  // TODO: disable my posts
   ngOnInit() {
     // TODO: do it with selectors(dont pass here unnecessary data)
     this.store.select<PostsState>('posts').subscribe(
