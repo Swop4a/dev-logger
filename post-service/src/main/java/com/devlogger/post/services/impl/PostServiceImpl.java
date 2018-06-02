@@ -6,11 +6,12 @@ import static com.devlogger.post.model.Tab.OWN_POSTS;
 
 import com.devlogger.account.model.Account;
 import com.devlogger.post.client.AccountServiceClient;
-import com.devlogger.post.helpers.TextNormalizeHelper;
 import com.devlogger.post.model.Post;
 import com.devlogger.post.model.Tab;
 import com.devlogger.post.repository.PostRepository;
 import com.devlogger.post.services.PostService;
+import com.devlogger.post.services.RangingService;
+import com.devlogger.post.services.TextService;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,17 +29,21 @@ public class PostServiceImpl implements PostService {
 
 	private final PostRepository repository;
 	private final AccountServiceClient client;
+	private final TextService textService;
+	private final RangingService rangingService;
 
 	@Autowired
-	public PostServiceImpl(PostRepository repository, AccountServiceClient client) {
+	public PostServiceImpl(PostRepository repository, AccountServiceClient client, TextService textService,
+		RangingService rangingService) {
 		this.repository = repository;
 		this.client = client;
+		this.textService = textService;
+		this.rangingService = rangingService;
 	}
 
 	@Override
 	public List<Post> findAllInPreviewMode(String handle, Tab tab, Boolean smart) {
 		log.info("REQUEST FOR TAB {} AND SMART MODE IS {}", tab, smart);
-
 		if (MY_POSTS.equals(tab)) {
 			Account account = client.getAccountByName(handle);
 			if (account == null) {
@@ -46,14 +51,13 @@ public class PostServiceImpl implements PostService {
 				return Collections.emptyList();
 			}
 
-			List<Long> ids = getFollowerIds(account);
+			List<Post> posts = repository.findAllByPublisherIdInAndOrderByPublicationDateDesc(getFollowerIds(account));
+			posts = convertToPreviewMode(posts);
 			if (smart) {
-				//TODO: it means that "show ONLY FOLLOWING'S posts with smart=true, delegate to other service"
-				return repository.findAll();
-			} else {
-				List<Post> posts = repository.findAllByPublisherIdInAndOrderByPublicationDateDesc(ids);
-				return convertToPreviewMode(posts);
+				return rangingService.rank(posts, account);
 			}
+
+			return posts;
 		}
 
 		if (OWN_POSTS.equals(tab)) {
@@ -62,8 +66,8 @@ public class PostServiceImpl implements PostService {
 		}
 
 		if (FEED.equals(tab)) {
-			//TODO: it means that "show ALL INTERESTING posts with smart=true, delegate to other service"
-			return repository.findAll();
+			List<Post> posts = repository.findAllByOrderByPublicationDateDesc();
+			return convertToPreviewMode(posts);
 		}
 
 		log.error("UNSUPPORTED TAB {} AND SMART MODE IS {}", tab, smart);
@@ -107,7 +111,7 @@ public class PostServiceImpl implements PostService {
 		return posts.stream()
 			.peek(post -> {
 				String content = post.getContent();
-				String previewContent = TextNormalizeHelper.normalize(content);
+				String previewContent = textService.toPreview(content);
 				post.setContent(previewContent);
 			})
 			.collect(Collectors.toList());

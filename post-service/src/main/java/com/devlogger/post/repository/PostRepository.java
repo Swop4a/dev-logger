@@ -19,4 +19,6 @@ public interface PostRepository extends MongoRepository<Post, String> {
 
 	@Query(value = "{ 'publisher.handle' : ?0 }", fields = "{ 'publisher.handle': 0 }")
 	List<Post> findAllByPublisherHandleAndOrderByPublicationDateDesc(String handle);
+
+	List<Post> findAllByOrderByPublicationDateDesc();
 }
