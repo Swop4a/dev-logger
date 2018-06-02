@@ -8,11 +8,19 @@
 }
 
 .profile {
-  height: 45px;
-  width: 45px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--black);
 
-  & > img {
-    width: 100%;
+  *:first-child {
+    margin: auto;
+    margin-right: 8px;
+  }
+
+  img {
+    height: 45px;
+    width: auto;
   }
 }
 

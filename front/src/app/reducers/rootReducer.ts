@@ -7,6 +7,7 @@ import {
 
 export interface AppState {
   posts: PostsState;
+  account: AccountState;
 }
 
 export interface ActionWithPayload extends Action {

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatToolbarModule,
@@ -15,6 +15,7 @@ import {
   MatDividerModule,
   MatTabsModule,
   MatCardModule,
+  MatSidenavModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
@@ -32,7 +33,7 @@ import { rootReducer } from './reducers/rootReducer';
 import { AppRoutingModule } from './app-routing.module';
 
 import { PostsService } from './posts.service';
-import { InMemoryDataService } from './in-memory-data.service';
+// import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -91,6 +92,7 @@ window.Quill.register('module/imageResize', ImageResize);
     MatDividerModule,
     MatTabsModule,
     MatCardModule,
+    MatSidenavModule,
 
     StoreModule.forRoot(rootReducer),
     EffectsModule.forRoot([PostsService, AccountEffects]),
@@ -100,9 +102,9 @@ window.Quill.register('module/imageResize', ImageResize);
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
-    ),
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
+    // ),
   ],
   providers: [
     PostsService,
