@@ -1,0 +1,18 @@
+server:
+  port: 4000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  routes:
+    account-service:
+      path: /accounts/**
+      serviceId: account-service
+      stripPrefix: false
+
+    post-service:
+      path: /posts/**
+      serviceId: post-service
+      stripPrefix: false

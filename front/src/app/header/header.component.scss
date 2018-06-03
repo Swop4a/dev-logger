@@ -1,0 +1,29 @@
+.logo {
+  height: 30px;
+  width: 136px;
+
+  & > img {
+    width: 100%;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--black);
+
+  *:first-child {
+    margin: auto;
+    margin-right: 8px;
+  }
+
+  img {
+    height: 45px;
+    width: auto;
+  }
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}

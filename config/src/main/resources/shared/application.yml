@@ -1,0 +1,7 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      fetchRegistry: true
+      defaultZone: http://${HOST}:8761/eureka/

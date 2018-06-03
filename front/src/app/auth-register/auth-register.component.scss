@@ -1,0 +1,17 @@
+main {
+  max-width: 960px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1044px) {
+    margin: 0 24px;
+  }
+}
+
+form {
+  margin-top: 24px;
+}
+
+.example-card {
+  max-width: 400px;
+  margin: 90px auto;
+}

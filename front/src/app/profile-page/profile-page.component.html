@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened fxLayout="column" fxLayoutAlign="start center">
+      <img [src]="user.image" class="grey-image">
+      <h1 class="mat-headline title">{{user.username}}</h1>
+      <p class="mat-body-1 company">{{user.company}}</p>
+      <p class="mat-body-2 tags">{{user.interests.join(', ')}}</p>
+
+      <div class="divider" fxFlex>
+        <app-divider></app-divider>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <app-post-preview *ngFor="let post of posts" [post]="post" [hideContent]="true"></app-post-preview>
+      <span *ngIf="posts.length === 0">There are no posts... yet</span>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</mat-card>

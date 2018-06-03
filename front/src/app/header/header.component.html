@@ -1,0 +1,26 @@
+<mat-toolbar role="header">
+  <a class="logo" routerLink="">
+    <img
+      srcset="assets/full-logo-white.png 320w,
+              assets/full-logo-white@2x.png 480w,
+              assets/full-logo-white@3x.png 800w"
+      alt="dev-logger"
+    >
+  </a>
+
+  <span class="fill-remaining-space"></span>
+
+  <!-- <app-searchbar></app-searchbar> -->
+
+  <!-- <a *ngIf="isLoggedIn" class="profile" routerLink="/profile" fxLayout="row" fxLayoutAlign="right center"> -->
+  <a *ngIf="isLoggedIn" class="profile" routerLink="/profile">
+    <span class="mat-subheading-2">{{user.username}}</span>
+    <img src="{{user.image}}" alt="profile"/>
+  </a>
+
+  <a
+    *ngIf="!isLoggedIn"
+    mat-raised-button routerLink="register"
+    class="register"
+  >Login/Sign up</a>
+</mat-toolbar>

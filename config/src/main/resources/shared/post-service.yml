@@ -1,0 +1,14 @@
+spring:
+  jackson:
+    mapper:
+      default-view-inclusion: true
+  data:
+    mongodb:
+      host: ${HOST}
+      port: 27017
+      username: admin
+      password: admin
+      database: admin
+server:
+  port: 8085
+  context-path: /posts

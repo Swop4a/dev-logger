@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${HOST}:5432/dlogger
+    username:
+    password:
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+server:
+  port: 8081
+  context-path: /accounts
