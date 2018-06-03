@@ -1,0 +1,13 @@
+// $anms-black-primary: mat-palette($mat-grey, 700, 300, 900);
+// $anms-black-accent: mat-palette($mat-blue-grey, 400);
+// $anms-black-warn: mat-palette($mat-red, 500);
+//
+$my-theme-primary: mat-palette($mat-indigo, 700, 300, 900);
+$my-theme-accent: mat-palette($mat-light-blue);
+$my-theme-warn: mat-palette($mat-deep-orange, A200);
+
+$anms-black-theme: mat-light-theme(
+  $my-theme-primary,
+  $my-theme-accent,
+  $my-theme-warn,
+);

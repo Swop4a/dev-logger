@@ -1,0 +1,34 @@
+<div class="post-preview" [ngClass]="{ 'post-preview_profile': hideContent }">
+  <img class="post-preview__image" src="{{post.image}}" alt="{{post.title}}">
+
+  <h1 class="mat-headline post__title">{{post.title}}</h1>
+  <h3 class="mat-subheading-2 post__tags">{{post.tags.join(', ')}}</h3>
+
+  <p *ngIf="!hideContent" class="mat-body-1">{{post.content}}</p>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="meta" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="24px">
+      <span fxLayout="row" fxLayoutAlign="start" fxLayoutGap="8px">
+        <svg-icon
+        fxFlex="0 0"
+        [ngClass]="{'active': isFavorite, 'inactive': !isFavorite}"
+        src="assets/star.svg"
+        [svgStyle]="{'width.px': 20 }"
+        ></svg-icon>
+        <span class="mat-caption" >{{post.rating}}</span>
+      </span>
+
+      <span class="mat-caption" fxLayout="row" class="eye" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <svg-icon fxFlex="0 0" src="assets/comments.svg"></svg-icon>
+        <span class="mat-caption">{{post.commentsCount}}</span>
+      </span>
+
+      <span class="mat-caption" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+        <svg-icon fxFlex="0 0" src="assets/calendar.svg"></svg-icon>
+        <span class="mat-caption">{{post.publicationDate | date:'shortDate'}}</span>
+      </span>
+    </div>
+
+    <button mat-button color="primary" (click)="seeMore()">SEE MORE</button>
+  </div>
+</div>

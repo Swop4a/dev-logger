@@ -1,0 +1,28 @@
+main {
+  max-width: 960px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1044px) {
+    margin: 0 24px;
+  }
+}
+
+article {
+  margin-top: 90px;
+  // max-width: 634px;
+}
+
+.post__date {
+  display: block;
+  margin-bottom: 32px;
+  color: var(--darkerGrey);
+}
+
+.post__title {
+  margin-bottom: 0;
+}
+
+.post__tags {
+  color: var(--darkerGrey);
+  margin-bottom: 32px;
+}
