@@ -14,9 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
 
-	@Query("{\"publisher.id\": { $in: ?0}}")
-	List<Post> findAllByPublisherIdInAndOrderByPublicationDateDesc(List<Long> ids);
+	@Query("{ 'publisher.handle': { $in: ?0 } }")
+	List<Post> findAllByPublisherHandleInAndOrderByPublicationDateDesc(List<String> handles);
 
 	@Query(value = "{ 'publisher.handle' : ?0 }", fields = "{ 'publisher.handle': 0 }")
 	List<Post> findAllByPublisherHandleAndOrderByPublicationDateDesc(String handle);
+
+	List<Post> findAllByOrderByPublicationDateDesc();
 }

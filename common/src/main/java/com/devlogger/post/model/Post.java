@@ -1,7 +1,12 @@
 package com.devlogger.post.model;
 
 import com.devlogger.account.model.Account;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -28,8 +33,11 @@ public class Post {
 	private List<String> tags;
 	private PostType type;
 	private String content;
-	private Statistic statistic;
-	private LocalDateTime publicationDate;
+
+	@JsonSerialize(using = ToStringSerializer.class)
+	private LocalDate publicationDate;
+
+	@JsonSerialize(using = ToStringSerializer.class)
 	private LocalDateTime lastUpdate;
 
 	@JsonView(View.Full.class)
@@ -38,4 +46,18 @@ public class Post {
 	@JsonView(View.Preview.class)
 	private String image;
 
+	@JsonIgnore
+	private List<Like> likes;
+
+	private List<Comment> comments;
+
+	@JsonProperty("rating")
+	public int getRating() {
+		return likes == null ? 0 : likes.size();
+	}
+
+	@JsonProperty("commentsCount")
+	public int getCommentsCount() {
+		return comments == null ? 0 : comments.size();
+	}
 }

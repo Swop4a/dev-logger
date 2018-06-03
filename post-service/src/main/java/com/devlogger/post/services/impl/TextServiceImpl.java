@@ -1,17 +1,21 @@
-package com.devlogger.post.helpers;
+package com.devlogger.post.services.impl;
+
+import com.devlogger.post.services.TextService;
+import org.springframework.stereotype.Service;
 
 /**
  * @author swop4a
  * @since 30/05/2018 17:21
  */
-
-public class TextNormalizeHelper {
+@Service
+public class TextServiceImpl implements TextService {
 
 	private static final Integer LIMIT = 1500;
 	private static final String NEW_PARAGRAPH = "\n\n";
 	private static final String DOT = ".";
 
-	public static String normalize(String text) {
+	@Override
+	public String toPreview(String text) {
 		StringBuilder content = new StringBuilder(text);
 		content = cropContent(content);
 		content = removeSpecialTags(content);

@@ -1,3 +1,13 @@
+insert into favorites("post_id", "time") values ('multithreading', CURRENT_DATE);
+insert into favorites("post_id", "time") values ('jvm', CURRENT_DATE);
+insert into favorites("post_id", "time") values ('spring_in_action', CURRENT_DATE);
+insert into favorites("post_id", "time") values ('python_gui', CURRENT_DATE);
+insert into favorites("post_id", "time") values ('python3', CURRENT_DATE);
+insert into favorites("post_id", "time") values ('best_python_ide', CURRENT_DATE);
+insert into favorites("post_id", "time") values ('git_for_beginners', CURRENT_DATE);
+insert into favorites("post_id", "time") values ('mongodb_for_beginners', CURRENT_DATE);
+
+
 insert into accounts (
   "id",
   "handle",
@@ -36,6 +46,13 @@ insert into interests("id", "interest") values (1, 'MongoDB');
 insert into post_ids("id", "post_id") values (1, 'java9');
 insert into post_ids("id", "post_id") values (1, 'collections');
 
+insert into accounts_favorites("id", "post_id") values (1, 'multithreading');
+insert into accounts_favorites("id", "post_id") values (1, 'jvm');
+insert into accounts_favorites("id", "post_id") values (1, 'spring_in_action');
+insert into accounts_favorites("id", "post_id") values (1, 'python_gui');
+insert into accounts_favorites("id", "post_id") values (1, 'mongodb_for_beginners');
+insert into accounts_favorites("id", "post_id") values (1, 'git_for_beginners');
+
 insert into accounts (
   "id",
   "handle",
@@ -73,6 +90,12 @@ insert into interests("id", "interest") values (2, 'Git');
 
 insert into post_ids("id", "post_id") values (2, 'django_orm');
 insert into post_ids("id", "post_id") values (2, 'python_gui');
+
+insert into accounts_favorites("id", "post_id") values (2, 'python3');
+insert into accounts_favorites("id", "post_id") values (2, 'best_python_ide');
+insert into accounts_favorites("id", "post_id") values (2, 'git_for_beginners');
+insert into accounts_favorites("id", "post_id") values (2, 'python_gui');
+insert into accounts_favorites("id", "post_id") values (2, 'mongodb_for_beginners');
 
 insert into accounts (
   "id",

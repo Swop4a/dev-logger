@@ -31,8 +31,8 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"followers", "following"})
-@ToString(exclude = {"followers", "following"})
+@EqualsAndHashCode(exclude = {"followers", "following", "favorites"})
+@ToString(exclude = {"followers", "following", "favorites"})
 @Builder
 @Entity
 @Table(name = "accounts", uniqueConstraints = {@UniqueConstraint(columnNames = "handle")})
@@ -52,13 +52,11 @@ public class Account {
 
 	@ElementCollection
 	@CollectionTable(name = "interests", joinColumns = @JoinColumn(name = "id"))
-	@Column(name = "interest")
 	private List<String> interests;
 
 	@JsonIgnore
 	@ElementCollection
-	@CollectionTable(name = "postIds", joinColumns = @JoinColumn(name = "id"))
-	@Column(name = "postId")
+	@CollectionTable(name = "post_ids", joinColumns = @JoinColumn(name = "id"))
 	private List<String> postIds;
 
 	@ManyToMany
@@ -74,6 +72,13 @@ public class Account {
 		inverseJoinColumns = @JoinColumn(name = "following_id", referencedColumnName = "id")
 	)
 	private List<Account> following;
+
+	@ManyToMany
+	@JoinTable(name = "accounts_favorites",
+		joinColumns = @JoinColumn(name = "id"),
+		inverseJoinColumns = @JoinColumn(name = "post_id")
+	)
+	private List<Favorite> favorites;
 
 //	@JsonSerialize(using = ToStringSerializer.class)
 //	private LocalDate since;
