@@ -52,13 +52,11 @@ public class Account {
 
 	@ElementCollection
 	@CollectionTable(name = "interests", joinColumns = @JoinColumn(name = "id"))
-	@Column(name = "interest")
 	private List<String> interests;
 
 	@JsonIgnore
 	@ElementCollection
-	@CollectionTable(name = "postIds", joinColumns = @JoinColumn(name = "id"))
-	@Column(name = "postId")
+	@CollectionTable(name = "post_ids", joinColumns = @JoinColumn(name = "id"))
 	private List<String> postIds;
 
 	@ManyToMany

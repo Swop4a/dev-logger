@@ -164,10 +164,11 @@ public class DevDataLoader {
 						+ "Vestibulum consequat volutpat sem vitae dapibus. Suspendisse tempor, magna et finibus rhoncus, tellus eros egestas ipsum, quis cursus enim ipsum convallis massa. Quisque id libero augue. Integer vehicula sem eu magna euismod, vel viverra diam tristique. Fusce pretium bibendum finibus. Fusce scelerisque est malesuada dui commodo, eget elementum velit elementum. Quisque imperdiet dui quis mauris dignissim, vitae varius orci ultricies. Donec faucibus luctus sem mollis pellentesque. Phasellus mollis libero tortor, in mattis eros blandit et. Cras ligula orci, viverra sed ullamcorper vel, venenatis et diam. Integer ultricies eu ligula ut rhoncus. Duis sit amet suscipit purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.")
 				.image("https://cdn.tproger.ru/wp-content/uploads/2018/03/pyqt-1.jpg")
 				.lastUpdate(LocalDateTime.now())
-				.publicationDate(LocalDate.now())
+				.publicationDate(LocalDate.now().minusWeeks(1))
 				.publisher(pProgrammer)
 				.tags(Arrays.asList("python", "gui", "qt", "pythonQt", "qtDesigner"))
 				.title("Python GUI: создаём простое приложение с PyQt и Qt Designer")
+				.likes(Arrays.asList(Like.builder().handle("JProgrammer").time(LocalDateTime.now()).build()))
 				.type(PostType.PUBLICATION)
 				.build();
 			repository.save(pythonGui);
@@ -200,11 +201,12 @@ public class DevDataLoader {
 						+ "Vestibulum consequat volutpat sem vitae dapibus. Suspendisse tempor, magna et finibus rhoncus, tellus eros egestas ipsum, quis cursus enim ipsum convallis massa. Quisque id libero augue. Integer vehicula sem eu magna euismod, vel viverra diam tristique. Fusce pretium bibendum finibus. Fusce scelerisque est malesuada dui commodo, eget elementum velit elementum. Quisque imperdiet dui quis mauris dignissim, vitae varius orci ultricies. Donec faucibus luctus sem mollis pellentesque. Phasellus mollis libero tortor, in mattis eros blandit et. Cras ligula orci, viverra sed ullamcorper vel, venenatis et diam. Integer ultricies eu ligula ut rhoncus. Duis sit amet suscipit purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.")
 				.image("https://www.tutorialspoint.com/java/images/Thread_Life_Cycle.jpg")
 				.lastUpdate(LocalDateTime.now())
-				.publicationDate(LocalDate.now())
+				.publicationDate(LocalDate.now().minusWeeks(2))
 				.publisher(postMaker)
 				.tags(Arrays.asList("java", "multithreading", "java memory model", "jmm"))
 				.title("Multithreading in practice")
 				.type(PostType.PUBLICATION)
+				.likes(Arrays.asList(Like.builder().handle("JProgrammer").time(LocalDateTime.now()).build()))
 				.comments(Collections
 					.singletonList(Comment.builder().author("JProgrammer").content("I know this!").build()))
 				.build();
@@ -375,6 +377,9 @@ public class DevDataLoader {
 				.tags(Arrays.asList("mongodb", "databases", "nosql"))
 				.title("MongoDB для начинающих")
 				.type(PostType.PUBLICATION)
+				.likes(Arrays.asList(
+					Like.builder().handle("JProgrammer").time(LocalDateTime.now()).build(),
+					Like.builder().handle("PProgrammer").time(LocalDateTime.now()).build()))
 				.build();
 			repository.save(mongoForBeginners);
 

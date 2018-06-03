@@ -51,7 +51,9 @@ public class PostServiceImpl implements PostService {
 				return Collections.emptyList();
 			}
 
-			List<Post> posts = repository.findAllByPublisherIdInAndOrderByPublicationDateDesc(getFollowerIds(account));
+			List<String> followerHandles = getFollowerHandles(account);
+			log.info("FOR ACCOUNT {} FOLLOWERS IDS {}", handle, followerHandles);
+			List<Post> posts = repository.findAllByPublisherHandleInAndOrderByPublicationDateDesc(followerHandles);
 			posts = convertToPreviewMode(posts);
 			if (smart) {
 				return rangingService.rank(posts, account);
@@ -117,9 +119,9 @@ public class PostServiceImpl implements PostService {
 			.collect(Collectors.toList());
 	}
 
-	private List<Long> getFollowerIds(Account account) {
+	private List<String> getFollowerHandles(Account account) {
 		return account.getFollowers().stream()
-			.map(Account::getId)
+			.map(Account::getHandle)
 			.collect(Collectors.toList());
 	}
 }

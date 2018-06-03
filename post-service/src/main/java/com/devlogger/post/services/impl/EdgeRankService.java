@@ -2,7 +2,10 @@ package com.devlogger.post.services.impl;
 
 import static java.lang.Math.log;
 import static java.lang.Math.log10;
+import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
+import static org.apache.commons.collections4.CollectionUtils.intersection;
+import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 import com.devlogger.account.model.Account;
 import com.devlogger.account.model.Favorite;
@@ -12,13 +15,14 @@ import com.devlogger.post.model.Post;
 import com.devlogger.post.services.RangingService;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,7 +33,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EdgeRankService implements RangingService {
 
-	private static final double BASE_SCORE = 0.01;
+	private static final double BASE_SCORE = 0.3;
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("##0.000000000");
 
 	@Override
@@ -67,9 +71,9 @@ public class EdgeRankService implements RangingService {
 	private double affinity(Post post, Account account) {
 		Account publisher = post.getPublisher();
 
-		double likesLog = log(calculateLikesOfPublisherPosts(account, publisher) + 1);
-		double mutualContacts = calculateMutualAccounts(account, publisher);
-		double mutualInterests = calculateMutualInterests(account, publisher);
+		double likesLog = log10(calculateLikesOfPublisherPosts(account, publisher) + 1);
+		double mutualContacts = log10(calculateMutualAccounts(account, publisher) + 1);
+		double mutualInterests = log10(calculateMutualInterests(account, publisher) + 1);
 
 		return likesLog * mutualContacts * mutualInterests;
 	}
@@ -80,26 +84,73 @@ public class EdgeRankService implements RangingService {
 	 * - Number of comments
 	 */
 	private double weight(Post post, Account account) {
-		double postLikesLog10 = log10(calculatePostLikes(post) + 1);
-		double commentsCountLog10 = log10(calculateCommentsCount(post) + 1);
-		double userCommentsCountLn = sqrt(calculateUserCommentsCount(post, account) + 1);
+		double postLikesLog = log(calculatePostLikes(post) + 1) * 1.5;
+		double commentsCountLog = log(calculateCommentsCount(post) + 1);
+		double userImpact = calculateUserImpact(post, account);
+		double tagRelevance = tagRelevance(post, account);
 
-		return postLikesLog10 * commentsCountLog10 * userCommentsCountLn;
+		return postLikesLog * commentsCountLog * userImpact * tagRelevance;
 	}
 
 	/**
 	 * Method calculate the metric of "fresh" of the post.
 	 */
 	private double decay(Post post) {
-		return 1;
+		LocalDate publicationDate = post.getPublicationDate();
+		return timeFunction(publicationDate);
+	}
+
+	private double tagRelevance(Post post, Account account) {
+		List<String> tags = post.getTags();
+		List<String> interests = account.getInterests();
+
+		if (isEmpty(tags) || isEmpty(interests)) {
+			return 1;
+		}
+
+		int counter = 0;
+
+		for (String tag : tags) {
+			for (String interest : interests) {
+				counter += tag.equalsIgnoreCase(interest) ? 1 : 0;
+			}
+		}
+
+		return counter == 0 ? 1 : counter;
+	}
+
+	private double timeFunction(LocalDate date) {
+		long timeDelta = LocalDate.now().toEpochDay() - date.toEpochDay();
+
+		if (timeDelta >= 0 && timeDelta <= 1) {
+			return sqrt(timeDelta) + BASE_SCORE;
+		} else if (timeDelta >= 2 && timeDelta <= 4) {
+			return 1;
+		} else {
+			return 1 / pow(timeDelta, 2);
+		}
+	}
+
+	private double calculateUserImpact(Post post, Account account) {
+		double userCommentsCount = log(calculateUserCommentsCount(post, account) + 1) * 4;
+		double userLikesCount = log(calculateUserLikesCount(post, account) + 1) * 2;
+
+		double impact = userCommentsCount + userLikesCount;
+
+		return impact == 0 ? BASE_SCORE : impact;
 	}
 
 	private double calculateUserCommentsCount(Post post, Account account) {
-		List<Like> likes;
-		if (CollectionUtils.isEmpty(likes = post.getLikes())) {
-			return BASE_SCORE;
-		}
-		return likes.stream()
+		return Optional.ofNullable(post.getComments())
+			.orElse(Collections.emptyList()).stream()
+			.map(Comment::getAuthor)
+			.filter(author -> author.equals(account.getHandle()))
+			.count();
+	}
+
+	private double calculateUserLikesCount(Post post, Account account) {
+		return Optional.ofNullable(post.getLikes())
+			.orElse(Collections.emptyList()).stream()
 			.map(Like::getHandle)
 			.filter(handle -> handle.equals(account.getHandle()))
 			.count();
@@ -107,7 +158,7 @@ public class EdgeRankService implements RangingService {
 
 	private double calculatePostLikes(Post post) {
 		List<Like> likes = post.getLikes();
-		if (CollectionUtils.isEmpty(likes)) {
+		if (isEmpty(likes)) {
 			return BASE_SCORE;
 		}
 		return likes.size();
@@ -115,7 +166,7 @@ public class EdgeRankService implements RangingService {
 
 	private static double calculateCommentsCount(Post post) {
 		List<Comment> comments = post.getComments();
-		if (CollectionUtils.isEmpty(comments)) {
+		if (isEmpty(comments)) {
 			return BASE_SCORE;
 		}
 		return calculateCommentsCount(comments, 0);
@@ -136,18 +187,20 @@ public class EdgeRankService implements RangingService {
 	private double calculateLikesOfPublisherPosts(Account account, Account publisher) {
 		LocalDate lastMonth = LocalDate.now().minusMonths(1L);
 		List<Favorite> favorites = account.getFavorites();
+		List<String> postIds = publisher.getPostIds();
 
-		if (CollectionUtils.isEmpty(favorites)) {
+		if (isEmpty(favorites) || isEmpty(postIds)) {
 			return BASE_SCORE;
 		}
 
 		long likes = favorites.stream()
-			.filter(favorite -> favorite.getAccounts() != null && favorite.getAccounts().contains(publisher))
+			.filter(Objects::nonNull)
 			.filter(favorite -> lastMonth.isBefore(favorite.getTime().toLocalDate()))
+			.map(Favorite::getPostId)
+			.filter(postIds::contains)
 			.count();
-		double likesOfPublisherPosts = likes / (double) favorites.size();
 
-		return likesOfPublisherPosts == 0 ? BASE_SCORE : likesOfPublisherPosts;
+		return likes == 0 ? BASE_SCORE : likes;
 	}
 
 	private double calculateMutualAccounts(Account account, Account publisher) {
@@ -162,15 +215,12 @@ public class EdgeRankService implements RangingService {
 		List accountList = accessFunction.apply(account);
 		List publisherList = accessFunction.apply(publisher);
 
-		if (CollectionUtils.isEmpty(accountList) || CollectionUtils.isEmpty(accountList)) {
+		if (isEmpty(accountList) || isEmpty(accountList)) {
 			return BASE_SCORE;
 		}
 
-		Collection intersection = CollectionUtils.intersection(accountList, publisherList);
-		Collection union = CollectionUtils.union(accountList, publisherList);
+		int intersectionSize = intersection(accountList, publisherList).size();
 
-		double mutualParts = intersection.size() / (double) union.size();
-
-		return mutualParts == 0 ? BASE_SCORE : mutualParts;
+		return intersectionSize == 0 ? BASE_SCORE : intersectionSize;
 	}
 }

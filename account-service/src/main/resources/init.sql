@@ -51,6 +51,7 @@ insert into accounts_favorites("id", "post_id") values (1, 'jvm');
 insert into accounts_favorites("id", "post_id") values (1, 'spring_in_action');
 insert into accounts_favorites("id", "post_id") values (1, 'python_gui');
 insert into accounts_favorites("id", "post_id") values (1, 'mongodb_for_beginners');
+insert into accounts_favorites("id", "post_id") values (1, 'git_for_beginners');
 
 insert into accounts (
   "id",
