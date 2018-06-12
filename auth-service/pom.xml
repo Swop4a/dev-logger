@@ -12,7 +12,7 @@
 
 	<groupId>com.devlogger</groupId>
 	<artifactId>auth-service</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<packaging>jar</packaging>
 
 	<name>DL Auth service</name>
