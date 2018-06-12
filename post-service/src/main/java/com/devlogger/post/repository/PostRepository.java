@@ -2,7 +2,6 @@ package com.devlogger.post.repository;
 
 import com.devlogger.post.model.Post;
 import java.util.List;
-import javafx.geometry.Pos;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
