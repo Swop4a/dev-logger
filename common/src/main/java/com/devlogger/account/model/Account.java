@@ -1,9 +1,13 @@
 package com.devlogger.account.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -50,10 +54,9 @@ public class Account {
 	private String company;
 	private BigDecimal rating;
 
-	@ElementCollection
-	@CollectionTable(name = "interests", joinColumns = @JoinColumn(name = "id"))
+	@JsonIgnore
 	@Column(name = "interest")
-	private List<String> interests;
+	private String interests;
 
 	@JsonIgnore
 	@ElementCollection
@@ -82,11 +85,11 @@ public class Account {
 	)
 	private List<Favorite> favorites;
 
-//	@JsonSerialize(using = ToStringSerializer.class)
-//	private LocalDate since;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+	private Date since;
 
-//	@JsonSerialize(using = ToStringSerializer.class)
-//	private LocalDateTime lastSeen;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+	private Date lastSeen;
 
 	private String skype;
 	private String gitHub;
@@ -94,4 +97,10 @@ public class Account {
 	private String facebook;
 	private String vk;
 	private String linkedIn;
+
+	//TODO send as string, consider with Alexander
+	@JsonProperty("interests")
+	public List<String> getInterestList() {
+		return Collections.emptyList();
+	}
 }

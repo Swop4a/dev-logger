@@ -1,8 +1,7 @@
-package com.devlogger.account.api;
+package com.devlogger.account.api.controllers;
 
 import com.devlogger.account.model.Account;
 import com.devlogger.account.services.AccountService;
-import com.devlogger.rest.AccountControllerInterface;
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 21/05/2018 23:51
  */
 @RestController
-public class AccountController implements AccountControllerInterface {
+public class AccountController {
 
 	private final AccountService accountService;
 
@@ -25,7 +24,6 @@ public class AccountController implements AccountControllerInterface {
 		this.accountService = accountService;
 	}
 
-	@Override
 	@RequestMapping(path = "/{handle}", method = RequestMethod.GET, produces = "application/json")
 	public Account getAccountByName(@PathVariable String handle) {
 		return accountService.getAccountByHandle(handle);
@@ -41,7 +39,6 @@ public class AccountController implements AccountControllerInterface {
 		accountService.updateAccount(principal.getName(), account);
 	}
 
-	@Override
 	@RequestMapping(path = "/", method = RequestMethod.POST, produces = "application/json")
 	public Account createNewAccount(@RequestBody Account account) {
 		return accountService.createAccount(account);

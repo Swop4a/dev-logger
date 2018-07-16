@@ -102,7 +102,7 @@ public class EdgeRankService implements RangingService {
 
 	private double tagRelevance(Post post, Account account) {
 		List<String> tags = post.getTags();
-		List<String> interests = account.getInterests();
+		List<String> interests = account.getInterestList();
 
 		if (isEmpty(tags) || isEmpty(interests)) {
 			return 1;
@@ -208,7 +208,7 @@ public class EdgeRankService implements RangingService {
 	}
 
 	private double calculateMutualInterests(Account account, Account publisher) {
-		return calculateMutualPart(account, publisher, Account::getInterests);
+		return calculateMutualPart(account, publisher, Account::getInterestList);
 	}
 
 	private double calculateMutualPart(Account account, Account publisher, Function<Account, List> accessFunction) {

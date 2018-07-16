@@ -20,7 +20,10 @@ insert into accounts (
   "vk",
   "linked_in",
   "skype",
-  "telegram"
+  "telegram",
+  "since",
+  "last_seen",
+  "interest"
 ) values (
   1,
   'JProgrammer',
@@ -33,15 +36,12 @@ insert into accounts (
   'https://vk.com/jporgrammer',
   'http://www.linkedin.com/jporgrammer',
   'Jprogrammer',
-  '@jprogrammer'
+  '@jprogrammer',
+  CURRENT_TIMESTAMP,
+  CURRENT_TIMESTAMP,
+  'Java;Spring;Spring Boot;Microservices;MongoDB'
 );
 
-insert into interests("id", "interest") values (1, 'Java');
-insert into interests("id", "interest") values (1, 'Spring');
-insert into interests("id", "interest") values (1, 'Spring Boot');
-insert into interests("id", "interest") values (1, 'Git');
-insert into interests("id", "interest") values (1, 'Microservices');
-insert into interests("id", "interest") values (1, 'MongoDB');
 
 insert into post_ids("id", "post_id") values (1, 'java9');
 insert into post_ids("id", "post_id") values (1, 'collections');
@@ -65,7 +65,8 @@ insert into accounts (
   "vk",
   "linked_in",
   "skype",
-  "telegram"
+  "telegram",
+  "interest"
 ) values (
   2,
   'PProgrammer',
@@ -78,15 +79,10 @@ insert into accounts (
   'https://vk.com/pporgrammer',
   'http://www.linkedin.com/pporgrammer',
   'Pprogrammer',
-  '@pprogrammer'
+  '@pprogrammer',
+  'Python;Django;Tensorflow;Pyramid;MongoDB;Git'
 );
 
-insert into interests("id", "interest") values (2, 'Python');
-insert into interests("id", "interest") values (2, 'Django');
-insert into interests("id", "interest") values (2, 'Tensorflow');
-insert into interests("id", "interest") values (2, 'Pyramid');
-insert into interests("id", "interest") values (2, 'MongoDB');
-insert into interests("id", "interest") values (2, 'Git');
 
 insert into post_ids("id", "post_id") values (2, 'django_orm');
 insert into post_ids("id", "post_id") values (2, 'python_gui');
@@ -109,7 +105,8 @@ insert into accounts (
   "vk",
   "linked_in",
   "skype",
-  "telegram"
+  "telegram",
+  "interest"
 ) values (
   3,
   'PostMaker',
@@ -122,10 +119,9 @@ insert into accounts (
   'https://vk.com/postsmaker',
   'http://www.linkedin.com/postsmaker',
   'PostsMaker',
-  '@postmaker'
+  '@postmaker',
+  'IT'
 );
-
-insert into interests("id", "interest") values (3, 'IT');
 
 insert into post_ids("id", "post_id") values (3, 'multithreading');
 insert into post_ids("id", "post_id") values (3, 'spring_in_action');
